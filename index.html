@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+        <link rel="stylesheet" href="index.css">
+
+        <title>Cadastro teste!</title>
+    </head>
+    <body>
+           
+            <main class="my-form">
+                <div class="cotainer">
+                    <div class="row justify-content-center">
+                        <div class="col-md-8">
+                                <div class="card">
+                                    <div class="card-header">Realizar o cadastro</div>
+                                    <div class="card-body">
+                                        <form name="my-form" onsubmit="return validform()" method="">
+                                            <div class="form-group row">
+                                                <label for="full_name" class="col-md-4 col-form-label text-md-right">Nome completo do beneficiário*</label>
+                                                <div class="col-md-6">
+                                                    <input type="text" id="full_name" class="form-control" name="full-name" required oninvalid="this.setCustomValidity('Este campo não pode ficar em branco')" oninput="setCustomValidity('')">
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row">
+                                                <label for="beneficiary_id" class="col-md-4 col-form-label text-md-right">CPF*</label>
+                                                <div class="col-md-6">
+                                                    <input type="text" id="beneficiary_id" class="form-control" name="beneficiary-id" required oninvalid="this.setCustomValidity('Este campo não pode ficar em branco')" oninput="setCustomValidity('')">
+                                                </div>
+                                            </div>
+
+
+                                            <div class="form-group row">
+                                                <label for="titular_beneficiary" class="col-md-4 col-form-label text-md-right">Beneficiário titular</label>
+                                                <div class="col-md-6">
+                                                    <input type="text" id="titular_beneficiary" class="form-control" name="titular-beneficiary">
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row">
+                                                <label for="birthday" class="col-md-4 col-form-label text-md-right">Data de nascimento</label>
+                                                <div class="col-md-6">
+                                                    <input type="date" id="birthday" class="form-control" name="birthday" required oninvalid="this.setCustomValidity('Este campo não pode ficar em branco')" oninput="setCustomValidity('')">
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row">
+                                                <label for="email_address" class="col-md-4 col-form-label text-md-right">E-Mail</label>
+                                                <div class="col-md-6">
+                                                    <input type="email" id="email_address" class="form-control" name="email-address">
+                                                </div>
+                                            </div>
+            
+                                            <div class="form-group row">
+                                                <label for="phone_number" class="col-md-4 col-form-label text-md-right">Número do celular (com DDD)</label>
+                                                <div class="col-md-6">
+                                                    <input type="number" id="phone_number" class="form-control" name="phone-number">
+                                                </div>
+                                            </div>
+            
+                                            <div class="form-group row">
+                                                <label for="corporate_id" class="col-md-4 col-form-label text-md-right">ID da corporação</label>
+                                                <div class="col-md-6">
+                                                    <input type="text" id="corporate_id" class="form-control" name="corporate-id" required oninvalid="this.setCustomValidity('Este campo não pode ficar em branco')" oninput="setCustomValidity('')">
+                                                </div>
+                                            </div>
+            
+                                            <div class="form-group row">
+                                                <label for="corporate_plan" class="col-md-4 col-form-label text-md-right">Plano da corporação</label>
+                                                <div class="col-md-6">
+                                                    <input type="text" id="corporate_plan" class="form-control" name="corporate-plan" required oninvalid="this.setCustomValidity('Este campo não pode ficar em branco')" oninput="setCustomValidity('')">
+                                                </div>
+                                            </div>
+                                                        
+                                            <div class="form-group row">
+                                                <label for="person_type" class="col-md-4 col-form-label text-md-right">Tipo do beneficiário</label>
+                                                <div class="col-md-6">
+                                                    <Select id="person_type" class="form-control" name="person-type" onchange="checkDependente()" required>
+                                                        <option value="" selected>Escolha...</option>
+                                                        <option value="1">Títular</option>
+                                                        <option value="2">Dependente</option>
+                                                    </Select>
+                                                </div>
+                                            </div>
+
+                                            <div id="dependant_div" class="form-group row" style="display: none;">
+                                                <label for="dependant_id" class="col-md-4 col-form-label text-md-right"><abbr title="CPF do titular ou Número do cliente caso o titular não possua CPF válido">Identificação do dependente</abbr></label>
+                                                <div class="col-md-6">
+                                                    <input type="text" id="dependant_id" class="form-control" name="dependant-id">
+                                                    <small id="passwordHelpBlock" class="form-text text-muted">
+                                                        CPF do titular ou Número do cliente caso o titular não possua CPF válido.
+                                                    </small>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row">
+                                                <label for="sex" class="col-md-4 col-form-label text-md-right">Sexo</label>
+                                                <div class="col-md-6">
+                                                    <Select id="sex" class="form-control" name="sex" required>
+                                                        <option value="" selected>Escolha...</option>
+                                                        <option value="M">Masculino</option>
+                                                        <option value="F">Feminino</option>
+                                                    </Select>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row">
+                                                <label for="beneficiary_state" class="col-md-4 col-form-label text-md-right">Status do beneficiário</label>
+                                                <div class="col-md-6">
+                                                    <Select id="beneficiary_state" class="form-control" name="beneficiary-state" required>
+                                                        <option value="" selected>Escolha...</option>
+                                                        <option value="A">Ativo</option>
+                                                        <option value="I">Inativo</option>
+                                                    </Select>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row">
+                                                <label for="client_id" class="col-md-4 col-form-label text-md-right">Identificação do cliente</label>
+                                                <div class="col-md-6">
+                                                    <input type="number" id="client_id" class="form-control" name="client-id" required oninvalid="this.setCustomValidity('Este campo não pode ficar em branco')" oninput="setCustomValidity('')">
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row">
+                                                <label for="sub_company_code" class="col-md-4 col-form-label text-md-right">Código Sub Empresa</label>
+                                                <div class="col-md-6">
+                                                    <input type="text" id="sub_company_code" class="form-control" name="sub-company-code" required oninvalid="this.setCustomValidity('Este campo não pode ficar em branco')" oninput="setCustomValidity('')">
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row">
+                                                <label for="products" class="col-md-4 col-form-label text-md-right">Produtos</label>
+                                                <div class="col-md-6">
+                                                    <input type="text" id="products" class="form-control" name="products" required oninvalid="this.setCustomValidity('Este campo não pode ficar em branco')" oninput="setCustomValidity('')">
+                                                </div>
+                                            </div>
+            
+                                            <!-- <div class="form-group row">
+                                                <label for="nid_number" class="col-md-4 col-form-label text-md-right"><abbr
+                                                            title="National Id Card">NID</abbr> Number</label>
+                                                <div class="col-md-6">
+                                                    <input type="text" id="nid_number" class="form-control" name="nid-number">
+                                                </div>
+                                            </div> -->
+            
+                                                <div class="col-md-6 offset-md-4">
+                                                    <button type="submit" class="btn btn-primary">
+                                                        Cadastrar
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+            
+            </main>
+        
+
+        <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+        <script src="jquery.js"></script>
+        <script src="index.js"></script>
+        <!-- <script src="dist/jquery.inputmask.js"></script>
+        <script src="dist/bindings/inputmask.binding.js"></script> -->
+    </body>
+</html>
