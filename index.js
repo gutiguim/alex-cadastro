@@ -38,26 +38,6 @@ function validform() {
 
     alert("SUCESSO!!");
 
-    // souseguros
-    // souseguros2020
-
-    // 9YfaeWDR83kZ4woTLWZILpB2McPwv0tj6K5gtYmygGW9sEcTfm8cERqDN7MjX2RLZWedII7W7tOa92kfsuQd3goqq0la8gUrTQ3cvziABbieBLK6CvxtoP6laTSUx4W0AB7jpZq6jVLzDt2762IYTZ4ybz54CMAtguPyRWcGmqzzjwaFHPFdLEkYjnf2pxsK-OOhTa20fDgST6tpzes9MykEDEJqkeEQjM5vBJrW4BBuHQ0tHDw1bfEomlZjBE7-XhPTLh4tH7RHjKP6IFySWbKtEmwy-ShFEts9E12z0iU86Aw_DI7-KR1MxzkOXB4V
-    // const userAction = async () => {
-    //     const response = await fetch('http://lifemanager.nextplus.com.br:9095/lifemanagerapihomologacao/lmapi/token', {
-    //         method: 'POST',
-    //         body: {
-    //             username: 'souseguros',
-    //             password: 'souseguros2020',
-    //             grant_type: 'password'
-    //         }, // string or object
-    //         headers: {
-    //             'Content-Type': 'application/json'
-    //         }
-    //     });
-    //     const myJson = await response.json(); //extract JSON from the http response
-    //     // do something with myJson
-    // }
-
     // else if (b==null || b=="")
     // {
     //     alert("Por favor, preencha o campo CPF");
