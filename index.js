@@ -22,7 +22,9 @@ function checkDependente() {
         // required oninvalid="this.
     } else {
         document.getElementById("dependant_div").style.display = 'none';
-        document.getElementById("dependant_id").required = false;
+        if(document.getElementById("dependant_id")) {
+            document.getElementById("dependant_id").required = false;
+        } 
     }
 }
 
