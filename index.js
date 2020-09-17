@@ -80,6 +80,8 @@ function validform() {
 }
 
 function sendData() {
+    console.log("ENTROU AQUI")
+
     var Nome = document.forms["my-form"]["nome"].value;
     var IdentificacaoBeneficiario = document.forms["my-form"]["cpfcnpj"].value;
     var IdentificacaoPessoa = document.forms["my-form"]["cpfcnpj"].value;
@@ -94,6 +96,8 @@ function sendData() {
     var StatusBeneficiario = 1;
     var IdentificacaoCliente = 205;
     var Produtos = 19;
+
+    console.log("ENTROU AQUI 2");
 
     var apiObject = {
         Nome,
@@ -112,6 +116,8 @@ function sendData() {
         Produtos,
     }
 
+    console.log("ENTROU AQUI 3")
+
     var apiObject = {
         guti: 'guti',
         deu: 'sim'
@@ -122,6 +128,8 @@ function sendData() {
     link.download = 'data.json';
     var blob = new Blob([jsonString], {type: 'text/plain'});
 
+    console.log("ENTROU AQUI 4")
+
     // var file = new File([mblob], "filename")
     var file = new File([blob], Nome + "_" + Date.now(), {type: 'text/plain', lastModified: Date.now()});
    
@@ -129,8 +137,7 @@ function sendData() {
     var storageRef = firebase.storage().ref();
     storageRef.put(file).then(function(snapshot) {
         console.log('Uploaded a blob or file!');
-      });
-      
+    });
 
-
+    return false;
 }
