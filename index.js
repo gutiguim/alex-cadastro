@@ -147,23 +147,44 @@ function sendData() {
     //     }
     // });
 
+    var details = {
+        'username': 'souseguros',
+        'password': 'souseguros2020',
+        'grant_type': 'password'
+    };
+    var formBody = [];
+    for (var property in details) {
+    var encodedKey = encodeURIComponent(property);
+    var encodedValue = encodeURIComponent(details[property]);
+    formBody.push(encodedKey + "=" + encodedValue);
+    }
+    formBody = formBody.join("&");
+
+    fetch('http://lifemanager.nextplus.com.br:9095/lifemanagerapihomologacao/lmapi/token', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+        },
+        body: formBody
+    })
+
     // $.post("http://lifemanager.nextplus.com.br:9095/lifemanagerapihomologacao/lmapi/cadastro", JSON.stringify(
     //     apiObject
     // ) );
 
-    $.ajax({
-        url: 'http://lifemanager.nextplus.com.br:9095/lifemanagerapihomologacao/lmapi/cadastro',
-        headers: {
-            'Authorization': 'Bearer kdJlLqx7AwPSrR8nOA91F_LwrhN0YUt13v_Cf5JYanjV_KBIpf7Vg5fNVUA_e2sX6GDQigORElcE4PUL3s2IR8uUchVuN6dN30Kjo6Yi-PFuC4ZTk_1HGqPqLJtJXizIVucuSMoR-i5mZkhgSn1Vei8foJgB011qdVfIJK8Nk1Qq1iUESi6w8kwoa-p75Y4kmaiCniWp1DherHPizbXDICx4fh0xdpLVeoaSNhrtWfuf9qcImbBy-8WV55D_w9Jy5-08JAaclcH0D_K5ZYnMd2pnRzbaIqKYub9-iyZshO0VMizN68-DAq2lKLGfC3rS', 
-        },
-        method: 'POST',
-        data: JSON.stringify(
-            apiObject
-        ),
-        success: function(data){
-            console.log('succes: '+data);
-        }
-    })
+    // $.ajax({
+    //     url: 'http://lifemanager.nextplus.com.br:9095/lifemanagerapihomologacao/lmapi/cadastro',
+    //     headers: {
+    //         'Authorization': 'Bearer kdJlLqx7AwPSrR8nOA91F_LwrhN0YUt13v_Cf5JYanjV_KBIpf7Vg5fNVUA_e2sX6GDQigORElcE4PUL3s2IR8uUchVuN6dN30Kjo6Yi-PFuC4ZTk_1HGqPqLJtJXizIVucuSMoR-i5mZkhgSn1Vei8foJgB011qdVfIJK8Nk1Qq1iUESi6w8kwoa-p75Y4kmaiCniWp1DherHPizbXDICx4fh0xdpLVeoaSNhrtWfuf9qcImbBy-8WV55D_w9Jy5-08JAaclcH0D_K5ZYnMd2pnRzbaIqKYub9-iyZshO0VMizN68-DAq2lKLGfC3rS', 
+    //     },
+    //     method: 'POST',
+    //     data: JSON.stringify(
+    //         apiObject
+    //     ),
+    //     success: function(data){
+    //         console.log('succes: '+data);
+    //     }
+    // })
 
     // // Create a root reference
     // var ref = firebase.storage();
