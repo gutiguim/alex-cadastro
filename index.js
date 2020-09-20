@@ -147,26 +147,26 @@ function sendData() {
     //     }
     // });
 
-    var details = {
-        'username': 'souseguros',
-        'password': 'souseguros2020',
-        'grant_type': 'password'
-    };
-    var formBody = [];
-    for (var property in details) {
-    var encodedKey = encodeURIComponent(property);
-    var encodedValue = encodeURIComponent(details[property]);
-    formBody.push(encodedKey + "=" + encodedValue);
-    }
-    formBody = formBody.join("&");
+    // var details = {
+    //     'username': 'souseguros',
+    //     'password': 'souseguros2020',
+    //     'grant_type': 'password'
+    // };
+    // var formBody = [];
+    // for (var property in details) {
+    // var encodedKey = encodeURIComponent(property);
+    // var encodedValue = encodeURIComponent(details[property]);
+    // formBody.push(encodedKey + "=" + encodedValue);
+    // }
+    // formBody = formBody.join("&");
 
-    fetch('https://lifemanager.nextplus.com.br:9095/lifemanagerapihomologacao/lmapi/token', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
-        },
-        body: formBody
-    })
+    // fetch('https://lifemanager.nextplus.com.br:9095/lifemanagerapihomologacao/lmapi/token', {
+    //     method: 'POST',
+    //     headers: {
+    //         'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+    //     },
+    //     body: formBody
+    // })
 
     // $.post("http://lifemanager.nextplus.com.br:9095/lifemanagerapihomologacao/lmapi/cadastro", JSON.stringify(
     //     apiObject
