@@ -9,6 +9,30 @@ body{
     color: #212529;
     text-align: left;
     background-color: #f5f8fa;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+html {
+    height: 100%;
+}
+
+main {
+    flex: 1;
+}
+
+.footer {
+    padding-top: 15px;
+    padding-bottom: 0px;
+    background-color: #171717!important;
+}
+
+.font-type {
+    font-family: 'Work Sans',Helvetica,Arial,Lucida,sans-serif;
+    font-weight: 600;
+    font-size: 15px;
 }
 
 .navbar-laravel
@@ -43,4 +67,18 @@ body{
 {
     margin-left: 0;
     margin-right: 0;
+}
+
+.padding-image {
+    padding: 1.5rem
+}
+
+.rounded-top-left {
+    padding: 10px;
+    border-top-left-radius: 55px;
+}
+
+.rounded-bottom-right {
+    padding: 10px;
+    border-bottom-right-radius: 55px;
 }
