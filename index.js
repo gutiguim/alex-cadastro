@@ -160,7 +160,7 @@ function sendData() {
     }
     formBody = formBody.join("&");
 
-    fetch('http://lifemanager.nextplus.com.br:9095/lifemanagerapihomologacao/lmapi/token', {
+    fetch('https://lifemanager.nextplus.com.br:9095/lifemanagerapihomologacao/lmapi/token', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
