@@ -119,7 +119,7 @@ function sendData() {
     if (IdentificacaoBeneficiario) apiObject["IdentificacaoBeneficiario"] = IdentificacaoBeneficiario;
     if (IdentificacaoPessoa) apiObject["IdentificacaoPessoa"] = IdentificacaoPessoa;
     // if (DataNascimento) apiObject["DataNascimento"] = DataNascimento;
-    if (DataNascimento) apiObject["DataNascimento"] = '26/05/1993';
+    if (DataNascimento) apiObject["DataNascimento"] = '26/5/1993';
     if (Email) apiObject["Email"] = Email;
     if (TelefoneCelular) apiObject["TelefoneCelular"] = TelefoneCelular;
     if (CorporateId) apiObject["CorporateId"] = CorporateId;
@@ -132,59 +132,13 @@ function sendData() {
     if (Produtos) apiObject["Produtos"] = Produtos;
 
     var jsonString = JSON.stringify(apiObject, undefined, 2);
+    console.log(jsonString);
 
-    // var xhr = new XMLHttpRequest();
-    // xhr.open('POST', 'http://lifemanager.nextplus.com.br:9095/lifemanagerapihomologacao/lmapi/cadastro', true);
-    // xhr.setRequestHeader('Authorization', 'Bearer ' + 'kdJlLqx7AwPSrR8nOA91F_LwrhN0YUt13v_Cf5JYanjV_KBIpf7Vg5fNVUA_e2sX6GDQigORElcE4PUL3s2IR8uUchVuN6dN30Kjo6Yi-PFuC4ZTk_1HGqPqLJtJXizIVucuSMoR-i5mZkhgSn1Vei8foJgB011qdVfIJK8Nk1Qq1iUESi6w8kwoa-p75Y4kmaiCniWp1DherHPizbXDICx4fh0xdpLVeoaSNhrtWfuf9qcImbBy-8WV55D_w9Jy5-08JAaclcH0D_K5ZYnMd2pnRzbaIqKYub9-iyZshO0VMizN68-DAq2lKLGfC3rS');
-    // xhr.send(JSON.stringify({
-    //     apiObject
-    // }));
-
-    // $.ajaxSetup({
-    //     headers: {
-    //         'Content-Type': 'text/plain',
-    //         'Authorization': 'Bearer kdJlLqx7AwPSrR8nOA91F_LwrhN0YUt13v_Cf5JYanjV_KBIpf7Vg5fNVUA_e2sX6GDQigORElcE4PUL3s2IR8uUchVuN6dN30Kjo6Yi-PFuC4ZTk_1HGqPqLJtJXizIVucuSMoR-i5mZkhgSn1Vei8foJgB011qdVfIJK8Nk1Qq1iUESi6w8kwoa-p75Y4kmaiCniWp1DherHPizbXDICx4fh0xdpLVeoaSNhrtWfuf9qcImbBy-8WV55D_w9Jy5-08JAaclcH0D_K5ZYnMd2pnRzbaIqKYub9-iyZshO0VMizN68-DAq2lKLGfC3rS'
-    //     }
-    // });
-
-    // var details = {
-    //     'username': 'souseguros',
-    //     'password': 'souseguros2020',
-    //     'grant_type': 'password'
-    // };
-    // var formBody = [];
-    // for (var property in details) {
-    // var encodedKey = encodeURIComponent(property);
-    // var encodedValue = encodeURIComponent(details[property]);
-    // formBody.push(encodedKey + "=" + encodedValue);
-    // }
-    // formBody = formBody.join("&");
-
-    // fetch('https://lifemanager.nextplus.com.br:9095/lifemanagerapihomologacao/lmapi/token', {
-    //     method: 'POST',
-    //     headers: {
-    //         'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
-    //     },
-    //     body: formBody
-    // })
-
-    // $.post("http://lifemanager.nextplus.com.br:9095/lifemanagerapihomologacao/lmapi/cadastro", JSON.stringify(
-    //     apiObject
-    // ) );
-
-    // $.ajax({
-    //     url: 'http://lifemanager.nextplus.com.br:9095/lifemanagerapihomologacao/lmapi/cadastro',
-    //     headers: {
-    //         'Authorization': 'Bearer kdJlLqx7AwPSrR8nOA91F_LwrhN0YUt13v_Cf5JYanjV_KBIpf7Vg5fNVUA_e2sX6GDQigORElcE4PUL3s2IR8uUchVuN6dN30Kjo6Yi-PFuC4ZTk_1HGqPqLJtJXizIVucuSMoR-i5mZkhgSn1Vei8foJgB011qdVfIJK8Nk1Qq1iUESi6w8kwoa-p75Y4kmaiCniWp1DherHPizbXDICx4fh0xdpLVeoaSNhrtWfuf9qcImbBy-8WV55D_w9Jy5-08JAaclcH0D_K5ZYnMd2pnRzbaIqKYub9-iyZshO0VMizN68-DAq2lKLGfC3rS', 
-    //     },
-    //     method: 'POST',
-    //     data: JSON.stringify(
-    //         apiObject
-    //     ),
-    //     success: function(data){
-    //         console.log('succes: '+data);
-    //     }
-    // })
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', 'https://cors-anywhere.herokuapp.com/http://lifemanager.nextplus.com.br:9095/lifemanagerapihomologacao/lmapi/cadastro', true);
+    xhr.setRequestHeader("Content-Type", "application/json; charset=utf-8");
+    xhr.setRequestHeader('Authorization', 'Bearer ' + 'LEKuQBkDmKbtnBsCbQq70wRClD1MMLAmn3GRs5NLWA-FgUecs0ScGf3ebrMtmj28nRNAVI5JneiR4zNPwqZJqRPpXwA1cFyDFMbAR4dhU0vj5A3Obr2cqWGeEkMBmAmFThgJhDKlo1TVNlys7aH8l76kSMWML2p5u48Td2gAqXdXW5epZ30q4IruHooH5QELxfXp61lSxs2TtT4-29k9fxJjHtHgKHEPuu8CT6rH4-q5AdauqZpt3PeomTUvMGPNzLWMFM1T7-GyOE_qXtj3oqWwfjFwSo6iTP6l_IJNhfwt2o6V3CBqpzdaCPYlsYnm');
+    xhr.send(jsonString);
 
     // // Create a root reference
     // var ref = firebase.storage();
