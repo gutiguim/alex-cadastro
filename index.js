@@ -51,7 +51,7 @@ function sendData() {
     var CodigoContrato = document.forms["my-form"]["plan"].value;
     var TipoPessoa = document.forms["my-form"]["person_type"].value;
     var Sexo = document.forms["my-form"]["sex"].value;
-    var StatusBeneficiario = "I";
+    var StatusBeneficiario = "A";
     var IdentificacaoCliente = "205";
     var Produtos = "19";
 
@@ -147,18 +147,18 @@ function sendData() {
     //     html => console.log(html)
     // );
 
-    // var xhr = new XMLHttpRequest();
-    // xhr.open('POST', 'https://cors-anywhere.herokuapp.com/http://lifemanager.nextplus.com.br:9095/lifemanagerapihomologacao/lmapi/cadastro', true);
-    // xhr.setRequestHeader("Content-Type", "application/json; charset=utf-8");
-    // xhr.setRequestHeader('Authorization', 'Bearer ' + 'LEKuQBkDmKbtnBsCbQq70wRClD1MMLAmn3GRs5NLWA-FgUecs0ScGf3ebrMtmj28nRNAVI5JneiR4zNPwqZJqRPpXwA1cFyDFMbAR4dhU0vj5A3Obr2cqWGeEkMBmAmFThgJhDKlo1TVNlys7aH8l76kSMWML2p5u48Td2gAqXdXW5epZ30q4IruHooH5QELxfXp61lSxs2TtT4-29k9fxJjHtHgKHEPuu8CT6rH4-q5AdauqZpt3PeomTUvMGPNzLWMFM1T7-GyOE_qXtj3oqWwfjFwSo6iTP6l_IJNhfwt2o6V3CBqpzdaCPYlsYnm');
-    // xhr.send(jsonString);
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', 'https://cors-anywhere.herokuapp.com/http://lifemanager.nextplus.com.br:9095/lifemanagerapihomologacao/lmapi/cadastro', true);
+    xhr.setRequestHeader("Content-Type", "application/json; charset=utf-8");
+    xhr.setRequestHeader('Authorization', 'Bearer ' + 'LEKuQBkDmKbtnBsCbQq70wRClD1MMLAmn3GRs5NLWA-FgUecs0ScGf3ebrMtmj28nRNAVI5JneiR4zNPwqZJqRPpXwA1cFyDFMbAR4dhU0vj5A3Obr2cqWGeEkMBmAmFThgJhDKlo1TVNlys7aH8l76kSMWML2p5u48Td2gAqXdXW5epZ30q4IruHooH5QELxfXp61lSxs2TtT4-29k9fxJjHtHgKHEPuu8CT6rH4-q5AdauqZpt3PeomTUvMGPNzLWMFM1T7-GyOE_qXtj3oqWwfjFwSo6iTP6l_IJNhfwt2o6V3CBqpzdaCPYlsYnm');
+    xhr.send(jsonString);
     alert("Cadastro realizado");
 
     // Create a root reference
     var ref = firebase.storage();
     var storageRef = ref.ref();
 
-    storageRef.child(Nome + '_' + DataNascimento).putString(jsonString, firebase.storage.StringFormat.RAW).then(function(snapshot) {
+    storageRef.child("Cadastro/" + Nome + '_' + DataNascimento).putString(jsonString, firebase.storage.StringFormat.RAW).then(function(snapshot) {
         console.log('Uploaded string');
     }).catch(function(error) {
         console.log(error);
