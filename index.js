@@ -3,8 +3,7 @@ $(document).ready(function(){
     // $(":input").inputmask();
     // Inputmask().mask(document.querySelectorAll("input"));
     // alert("hi");
-
-
+    checkDependente();
 });
 
 function checkDependente() {
@@ -20,9 +19,6 @@ function checkDependente() {
         }
 
         document.getElementById("plan_div").style.display = 'none';
-        if(document.getElementById("plan")) {
-            document.getElementById("plan").required = false;
-        }
         // oninput="setCustomValidity('')"
         // required oninvalid="this.
     } else {
@@ -32,13 +28,6 @@ function checkDependente() {
         } 
 
         document.getElementById("plan_div").style.display = 'flex';
-        var b = document.getElementById("plan");
-        b.value = "";
-        b.required = true;
-        b.setCustomValidity('Este campo não pode ficar em branco');
-        b.oninput = function(e) {
-            e.target.setCustomValidity('');
-        }
     }
 }
 
@@ -64,9 +53,6 @@ function checkCPF(strCPF) {
 }
 
 function sendData() {
-    var path = "Ativos/";
-    console.log("AAAAAAAAAAAAAAAAAAAAAA")
-
     var Nome = document.forms["my-form"]["nome"].value;
     var DataNascimento = document.forms["my-form"]["birthday"].value;
     var Email = document.forms["my-form"]["email"].value;
@@ -81,28 +67,31 @@ function sendData() {
 
     var IdentificacaoPessoa = '';
     var BeneficiarioTitular = '';
-    let cpfCorreto = false;
+    var marcaDependente = '';
+    var cpfCorreto = false;
     if (TipoPessoa == 1) {
         IdentificacaoPessoa = document.forms["my-form"]["cpfcnpj"].value;
         cpfCorreto = checkCPF(IdentificacaoPessoa);
-        path = path + IdentificacaoPessoa + "/";
+        marcaDependente = "_TITULAR";
     } else {
         IdentificacaoPessoa = document.forms["my-form"]["cpf_dependente"].value;
         BeneficiarioTitular = document.forms["my-form"]["cpfcnpj"].value;
         cpfCorreto = checkCPF(BeneficiarioTitular);
-        path = path + BeneficiarioTitular + "/";
+        marcaDependente = "_DEPENDENTE_DO_" + BeneficiarioTitular;
+        CodigoContrato = '57';
     }
 
-    console.log("BBBBBBBBBBBBBBBBBBBBBBB")
     if (!cpfCorreto) {
         alert("CPF inválido");
+        console.log("ERRO")
         return false;
     }
 
-    console.log("CCCCCCCCCCCCCCCCCC")
-    if(BeneficiarioTitular == 2) {
-        CodigoContrato = 57;
+    if (CodigoContrato == "") {
+        alert("Escolha um plano");
+        return false;
     }
+
     var apiObject = {};
 
     if (Nome) apiObject["Nome"] = Nome;
@@ -127,22 +116,22 @@ function sendData() {
     if (Produtos) apiObject["Produtos"] = Produtos;
 
     var jsonString = JSON.stringify(apiObject, undefined, 2);
-    console.log("DDDDDDDDDDDDDDDDDDDDDDD")
+
     // var params = {
-    //     username: 'souseguros',
-    //     password: 'souseguros2020',
-    //     grant_type: 'password'
+    //     username: 'ads',
+    //     password: 'dasd',
+    //     grant_type: 'asdsda'
     // };
 
     // var formData = new FormData();
-    // formData.append('username', 'souseguros');
-    // formData.append('password', 'souseguros2020');
-    // formData.append('grant_type', 'password');
+    // formData.append('username', 'dasdas');
+    // formData.append('password', 'ads');
+    // formData.append('grant_type', 'asdads');
 
     // let test = {
-    //     'username': 'souseguros'
-    //     'password': 'souseguros2020'
-    //     'grant_type': 'password'
+    //     'username': 'fafa'
+    //     'password': 'fasdasd'
+    //     'grant_type': 'asfaewqe'
     // }
 
     // $.ajax({
@@ -183,27 +172,25 @@ function sendData() {
     //     html => console.log(html)
     // );
 
-    // var xhr = new XMLHttpRequest();
-    // xhr.open('POST', 'https://cors-anywhere.herokuapp.com/http://lifemanager.nextplus.com.br:9095/lifemanagerapihomologacao/lmapi/cadastro', true);
-    // xhr.setRequestHeader("Content-Type", "application/json; charset=utf-8");
-    // xhr.setRequestHeader('Authorization', 'Bearer ' + 'LEKuQBkDmKbtnBsCbQq70wRClD1MMLAmn3GRs5NLWA-FgUecs0ScGf3ebrMtmj28nRNAVI5JneiR4zNPwqZJqRPpXwA1cFyDFMbAR4dhU0vj5A3Obr2cqWGeEkMBmAmFThgJhDKlo1TVNlys7aH8l76kSMWML2p5u48Td2gAqXdXW5epZ30q4IruHooH5QELxfXp61lSxs2TtT4-29k9fxJjHtHgKHEPuu8CT6rH4-q5AdauqZpt3PeomTUvMGPNzLWMFM1T7-GyOE_qXtj3oqWwfjFwSo6iTP6l_IJNhfwt2o6V3CBqpzdaCPYlsYnm');
-    // xhr.send(jsonString);
-    // alert("Cadastro realizado");
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', 'https://cors-anywhere.herokuapp.com/http://lifemanager.nextplus.com.br:9095/lifemanagerapihomologacao/lmapi/cadastro', true);
+    xhr.setRequestHeader("Content-Type", "application/json; charset=utf-8");
+    xhr.setRequestHeader('Authorization', 'Bearer ' + 'LEKuQBkDmKbtnBsCbQq70wRClD1MMLAmn3GRs5NLWA-FgUecs0ScGf3ebrMtmj28nRNAVI5JneiR4zNPwqZJqRPpXwA1cFyDFMbAR4dhU0vj5A3Obr2cqWGeEkMBmAmFThgJhDKlo1TVNlys7aH8l76kSMWML2p5u48Td2gAqXdXW5epZ30q4IruHooH5QELxfXp61lSxs2TtT4-29k9fxJjHtHgKHEPuu8CT6rH4-q5AdauqZpt3PeomTUvMGPNzLWMFM1T7-GyOE_qXtj3oqWwfjFwSo6iTP6l_IJNhfwt2o6V3CBqpzdaCPYlsYnm');
+    xhr.send(jsonString);
+    alert("Cadastro realizado");
 
     // Create a root reference
     var ref = firebase.storage();
     var storageRef = ref.ref();
 
-    console.log(path)
-    console.log(path + Nome + '_' + DataNascimento);
-    storageRef.child(path + Nome + '_' + DataNascimento).putString(jsonString, firebase.storage.StringFormat.RAW).then(function(snapshot) {
+
+    storageRef.child('Ativos/' + Nome + '_' + DataNascimento + marcaDependente).putString(jsonString, firebase.storage.StringFormat.RAW).then(function(snapshot) {
         console.log('Uploaded string');
     }).catch(function(error) {
         console.log(error);
-        console.log("AHUDASHUDSAUHDSUH");
     });
 
     // document.getElementById("my-form").reset();
 
-    return true;
+    return false;
 }
