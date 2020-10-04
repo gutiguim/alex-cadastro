@@ -42,7 +42,31 @@ function checkDependente() {
     }
 }
 
+function checkCPF(strCPF) {
+    var Soma;
+    var Resto;
+    Soma = 0;
+  if (strCPF == "00000000000") return false;
+
+  for (i=1; i<=9; i++) Soma = Soma + parseInt(strCPF.substring(i-1, i)) * (11 - i);
+  Resto = (Soma * 10) % 11;
+
+    if ((Resto == 10) || (Resto == 11))  Resto = 0;
+    if (Resto != parseInt(strCPF.substring(9, 10)) ) return false;
+
+  Soma = 0;
+    for (i = 1; i <= 10; i++) Soma = Soma + parseInt(strCPF.substring(i-1, i)) * (12 - i);
+    Resto = (Soma * 10) % 11;
+
+    if ((Resto == 10) || (Resto == 11))  Resto = 0;
+    if (Resto != parseInt(strCPF.substring(10, 11) ) ) return false;
+    return true;
+}
+
 function sendData() {
+    var path = "Ativos/";
+    console.log("AAAAAAAAAAAAAAAAAAAAAA")
+
     var Nome = document.forms["my-form"]["nome"].value;
     var DataNascimento = document.forms["my-form"]["birthday"].value;
     var Email = document.forms["my-form"]["email"].value;
@@ -57,13 +81,25 @@ function sendData() {
 
     var IdentificacaoPessoa = '';
     var BeneficiarioTitular = '';
+    let cpfCorreto = false;
     if (TipoPessoa == 1) {
         IdentificacaoPessoa = document.forms["my-form"]["cpfcnpj"].value;
+        cpfCorreto = checkCPF(IdentificacaoPessoa);
+        path = path + IdentificacaoPessoa + "/";
     } else {
         IdentificacaoPessoa = document.forms["my-form"]["cpf_dependente"].value;
         BeneficiarioTitular = document.forms["my-form"]["cpfcnpj"].value;
+        cpfCorreto = checkCPF(BeneficiarioTitular);
+        path = path + BeneficiarioTitular + "/";
     }
 
+    console.log("BBBBBBBBBBBBBBBBBBBBBBB")
+    if (!cpfCorreto) {
+        alert("CPF inválido");
+        return false;
+    }
+
+    console.log("CCCCCCCCCCCCCCCCCC")
     if(BeneficiarioTitular == 2) {
         CodigoContrato = 57;
     }
@@ -91,7 +127,7 @@ function sendData() {
     if (Produtos) apiObject["Produtos"] = Produtos;
 
     var jsonString = JSON.stringify(apiObject, undefined, 2);
-
+    console.log("DDDDDDDDDDDDDDDDDDDDDDD")
     // var params = {
     //     username: 'souseguros',
     //     password: 'souseguros2020',
@@ -147,24 +183,27 @@ function sendData() {
     //     html => console.log(html)
     // );
 
-    var xhr = new XMLHttpRequest();
-    xhr.open('POST', 'https://cors-anywhere.herokuapp.com/http://lifemanager.nextplus.com.br:9095/lifemanagerapihomologacao/lmapi/cadastro', true);
-    xhr.setRequestHeader("Content-Type", "application/json; charset=utf-8");
-    xhr.setRequestHeader('Authorization', 'Bearer ' + 'LEKuQBkDmKbtnBsCbQq70wRClD1MMLAmn3GRs5NLWA-FgUecs0ScGf3ebrMtmj28nRNAVI5JneiR4zNPwqZJqRPpXwA1cFyDFMbAR4dhU0vj5A3Obr2cqWGeEkMBmAmFThgJhDKlo1TVNlys7aH8l76kSMWML2p5u48Td2gAqXdXW5epZ30q4IruHooH5QELxfXp61lSxs2TtT4-29k9fxJjHtHgKHEPuu8CT6rH4-q5AdauqZpt3PeomTUvMGPNzLWMFM1T7-GyOE_qXtj3oqWwfjFwSo6iTP6l_IJNhfwt2o6V3CBqpzdaCPYlsYnm');
-    xhr.send(jsonString);
-    alert("Cadastro realizado");
+    // var xhr = new XMLHttpRequest();
+    // xhr.open('POST', 'https://cors-anywhere.herokuapp.com/http://lifemanager.nextplus.com.br:9095/lifemanagerapihomologacao/lmapi/cadastro', true);
+    // xhr.setRequestHeader("Content-Type", "application/json; charset=utf-8");
+    // xhr.setRequestHeader('Authorization', 'Bearer ' + 'LEKuQBkDmKbtnBsCbQq70wRClD1MMLAmn3GRs5NLWA-FgUecs0ScGf3ebrMtmj28nRNAVI5JneiR4zNPwqZJqRPpXwA1cFyDFMbAR4dhU0vj5A3Obr2cqWGeEkMBmAmFThgJhDKlo1TVNlys7aH8l76kSMWML2p5u48Td2gAqXdXW5epZ30q4IruHooH5QELxfXp61lSxs2TtT4-29k9fxJjHtHgKHEPuu8CT6rH4-q5AdauqZpt3PeomTUvMGPNzLWMFM1T7-GyOE_qXtj3oqWwfjFwSo6iTP6l_IJNhfwt2o6V3CBqpzdaCPYlsYnm');
+    // xhr.send(jsonString);
+    // alert("Cadastro realizado");
 
     // Create a root reference
     var ref = firebase.storage();
     var storageRef = ref.ref();
 
-    storageRef.child("Cadastro/" + Nome + '_' + DataNascimento).putString(jsonString, firebase.storage.StringFormat.RAW).then(function(snapshot) {
+    console.log(path)
+    console.log(path + Nome + '_' + DataNascimento);
+    storageRef.child(path + Nome + '_' + DataNascimento).putString(jsonString, firebase.storage.StringFormat.RAW).then(function(snapshot) {
         console.log('Uploaded string');
     }).catch(function(error) {
         console.log(error);
+        console.log("AHUDASHUDSAUHDSUH");
     });
 
     // document.getElementById("my-form").reset();
 
-    return false;
+    return true;
 }
