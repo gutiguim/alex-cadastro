@@ -165,9 +165,9 @@ function sendData() {
         var jsonString2 = JSON.stringify(apiObject2, undefined, 2);
 
         var xhr2 = new XMLHttpRequest();
-        xhr2.open('POST', 'https://cors-anywhere.herokuapp.com/http://lifemanager.nextplus.com.br:9095/lifemanagerapihomologacao/lmapi/cadastro', true);
+        xhr2.open('POST', 'https://cors-anywhere.herokuapp.com/http://lifemanager.nextplus.com.br:9095/lifemanagerapi/lmapi/cadastro', true);
         xhr2.setRequestHeader("Content-Type", "application/json; charset=utf-8");
-        xhr2.setRequestHeader('Authorization', 'Bearer ' + 'LEKuQBkDmKbtnBsCbQq70wRClD1MMLAmn3GRs5NLWA-FgUecs0ScGf3ebrMtmj28nRNAVI5JneiR4zNPwqZJqRPpXwA1cFyDFMbAR4dhU0vj5A3Obr2cqWGeEkMBmAmFThgJhDKlo1TVNlys7aH8l76kSMWML2p5u48Td2gAqXdXW5epZ30q4IruHooH5QELxfXp61lSxs2TtT4-29k9fxJjHtHgKHEPuu8CT6rH4-q5AdauqZpt3PeomTUvMGPNzLWMFM1T7-GyOE_qXtj3oqWwfjFwSo6iTP6l_IJNhfwt2o6V3CBqpzdaCPYlsYnm');
+        xhr2.setRequestHeader('Authorization', 'Bearer ' + '2J94aB1OlhmksPMH3-qOrMywa_Dqrywm8Nla14UP4lPwK3pQgPtGvxyPnOvLvPmTWvKUkocOb-Y7oy6-CCPZ262DM-lv9NHOAP1x_9uMftvLb4NPODCNkR9hTT_GqKjAH3_etZjf7QCBNJdC5Q6dY_T-rdXUeaMEUzFAdIW5dRNEr1AAV34CohYQJ1BG1JNItx9Kf5Xb9iOHN-iRvv-zz3eekMcWiIQ8MJE_V02B1Q2BvR7hRVW0zh_0hOCq5Vn5tlqQMPT_VL1cpQhFWcfwjLRenNDXfHsOlA6TaxeL3rWE-tOZsjk_DmCz3wAvlSlw');
         xhr2.send(jsonString2);
         
         storageRef.child('Ativos/' + Nome + '_' + DataNascimento + "_DEPENDENTE_DO_" + BeneficiarioTitular).putString(jsonString2, firebase.storage.StringFormat.RAW).then(function(snapshot) {
