@@ -87,3 +87,8 @@ main {
     padding: 10px;
     border-bottom-right-radius: 55px;
 }
+
+.loading{
+    background-image : url('http://www.fotos-lienzo.es/media/aw_searchautocomplete/default/loading.gif');  
+    background-repeat:no-repeat;
+}
