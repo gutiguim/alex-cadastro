@@ -148,7 +148,7 @@ function sendData() {
     var ref = firebase.storage();
     var storageRef = ref.ref();
     
-    storageRef.child('Testes/' + Nome + '_' + DataNascimento + "_TITULAR").putString(jsonString, firebase.storage.StringFormat.RAW).then(function(snapshot) {
+    storageRef.child('Ativos/' + Nome + '_' + DataNascimento + "_TITULAR").putString(jsonString, firebase.storage.StringFormat.RAW).then(function(snapshot) {
         console.log('Uploaded string');
     }).catch(function(error) {
         console.log(error);
@@ -212,7 +212,7 @@ function sendData() {
             alert("Request failed");
     };
 
-        storageRef.child('Testes/' + Nome + '_' + DataNascimento + "_DEPENDENTE_DO_" + BeneficiarioTitular).putString(jsonString2, firebase.storage.StringFormat.RAW).then(function(snapshot) {
+        storageRef.child('Ativos/' + Nome + '_' + DataNascimento + "_DEPENDENTE_DO_" + BeneficiarioTitular).putString(jsonString2, firebase.storage.StringFormat.RAW).then(function(snapshot) {
             console.log('Uploaded string');
         }).catch(function(error) {
             console.log(error);
@@ -272,7 +272,7 @@ function sendData() {
             }
         };
 
-        storageRef.child('Testes/' + Nome + '_' + DataNascimento + "_DEPENDENTE_DO_" + BeneficiarioTitular).putString(jsonString3, firebase.storage.StringFormat.RAW).then(function(snapshot) {
+        storageRef.child('Ativos/' + Nome + '_' + DataNascimento + "_DEPENDENTE_DO_" + BeneficiarioTitular).putString(jsonString3, firebase.storage.StringFormat.RAW).then(function(snapshot) {
             console.log('Uploaded string');
         }).catch(function(error) {
             console.log(error);
@@ -332,7 +332,7 @@ function sendData() {
             }
         };
 
-        storageRef.child('Testes/' + Nome + '_' + DataNascimento + "_DEPENDENTE_DO_" + BeneficiarioTitular).putString(jsonString4, firebase.storage.StringFormat.RAW).then(function(snapshot) {
+        storageRef.child('Ativos/' + Nome + '_' + DataNascimento + "_DEPENDENTE_DO_" + BeneficiarioTitular).putString(jsonString4, firebase.storage.StringFormat.RAW).then(function(snapshot) {
             console.log('Uploaded string');
         }).catch(function(error) {
             console.log(error);
@@ -426,7 +426,7 @@ function sendData() {
     // var storageRef = ref.ref();
 
 
-    // storageRef.child('Testes/' + Nome + '_' + DataNascimento + marcaDependente).putString(jsonString, firebase.storage.StringFormat.RAW).then(function(snapshot) {
+    // storageRef.child('Ativos/' + Nome + '_' + DataNascimento + marcaDependente).putString(jsonString, firebase.storage.StringFormat.RAW).then(function(snapshot) {
     //     console.log('Uploaded string');
     // }).catch(function(error) {
     //     console.log(error);
