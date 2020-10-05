@@ -4,30 +4,41 @@ $(document).ready(function(){
     // Inputmask().mask(document.querySelectorAll("input"));
     // alert("hi");
     checkDependente();
+    checkQuantosFormularios();
 });
 
 function checkDependente() {
-    var x = document.getElementById("person_type").value;
-    if(x === "2") {
-        document.getElementById("dependant_div").style.display = 'flex';
-        var a = document.getElementById("cpf_dependente");
-        a.value = '';
-        a.required = true;
-        a.setCustomValidity('Este campo não pode ficar em branco');
-        a.oninput = function(e) {
-            e.target.setCustomValidity('');
-        }
-
-        document.getElementById("plan_div").style.display = 'none';
-        // oninput="setCustomValidity('')"
-        // required oninvalid="this.
+    var x = document.getElementById("plan").value;
+    if(x === "57") {
+        document.getElementById("dependant_div").style.display = 'inline';
     } else {
         document.getElementById("dependant_div").style.display = 'none';
-        if(document.getElementById("dependant_id")) {
-            document.getElementById("dependant_id").required = false;
-        } 
+    }
+}
 
-        document.getElementById("plan_div").style.display = 'flex';
+function checkQuantosFormularios() {
+    var key = document.getElementById("numero_dependentes").value;
+    switch (key) {
+        case '3':
+            document.getElementById("dependant_1_div").style.display = 'inline';
+            document.getElementById("dependant_2_div").style.display = 'inline';
+            document.getElementById("dependant_3_div").style.display = 'inline';
+            break;
+        case '2':
+            document.getElementById("dependant_1_div").style.display = 'inline';
+            document.getElementById("dependant_2_div").style.display = 'inline';
+            document.getElementById("dependant_3_div").style.display = 'none';
+            break;
+        case '1':
+            document.getElementById("dependant_1_div").style.display = 'inline';
+            document.getElementById("dependant_2_div").style.display = 'none';
+            document.getElementById("dependant_3_div").style.display = 'none';
+            break
+        default:
+            document.getElementById("dependant_1_div").style.display = 'none';
+            document.getElementById("dependant_2_div").style.display = 'none';
+            document.getElementById("dependant_3_div").style.display = 'none';
+            break;
     }
 }
 
@@ -53,69 +64,220 @@ function checkCPF(strCPF) {
 }
 
 function sendData() {
-    var Nome = document.forms["my-form"]["nome"].value;
-    var DataNascimento = document.forms["my-form"]["birthday"].value;
-    var Email = document.forms["my-form"]["email"].value;
-    var TelefoneCelular = document.forms["my-form"]["phone"].value;
     var CorporateId = "39";
-    var CodigoContrato = document.forms["my-form"]["plan"].value;
-    var TipoPessoa = document.forms["my-form"]["person_type"].value;
-    var Sexo = document.forms["my-form"]["sex"].value;
     var StatusBeneficiario = "A";
     var IdentificacaoCliente = "205";
     var Produtos = "19";
+    var CodigoContrato = document.forms["my-form"]["plan"].value;
 
-    var IdentificacaoPessoa = '';
-    var BeneficiarioTitular = '';
-    var marcaDependente = '';
-    var cpfCorreto = false;
-    if (TipoPessoa == 1) {
-        IdentificacaoPessoa = document.forms["my-form"]["cpfcnpj"].value;
-        cpfCorreto = checkCPF(IdentificacaoPessoa);
-        marcaDependente = "_TITULAR";
-    } else {
-        IdentificacaoPessoa = document.forms["my-form"]["cpf_dependente"].value;
-        BeneficiarioTitular = document.forms["my-form"]["cpfcnpj"].value;
-        cpfCorreto = checkCPF(BeneficiarioTitular);
-        marcaDependente = "_DEPENDENTE_DO_" + BeneficiarioTitular;
-        CodigoContrato = '57';
-    }
+    var apiObject = {};
+    apiObject["CorporateId"] = CorporateId;
+    apiObject["StatusBeneficiario"] = StatusBeneficiario;
+    apiObject["IdentificacaoCliente"] = IdentificacaoCliente;
+    apiObject["Produtos"] = Produtos;
+    apiObject["CodigoContrato"] = CodigoContrato;
 
+    // ---------------------------------------------------------Dados titular
+    var Nome = document.forms["my-form"]["nome_titular"].value;
+    var DataNascimento = document.forms["my-form"]["birthday_titular"].value;
+    var Email = document.forms["my-form"]["email_titular"].value;
+    var TelefoneCelular = document.forms["my-form"]["phone_titular"].value;
+    var Sexo = document.forms["my-form"]["sex_titular"].value;
+    var IdentificacaoPessoa = document.forms["my-form"]["cpfcnpj"].value;
+    
+    var cpfCorreto = checkCPF(IdentificacaoPessoa);
     if (!cpfCorreto) {
-        alert("CPF inválido");
-        console.log("ERRO")
+        alert("CPF titular inválido");
         return false;
     }
-
+    
     if (CodigoContrato == "") {
         alert("Escolha um plano");
         return false;
     }
-
-    var apiObject = {};
-
-    if (Nome) apiObject["Nome"] = Nome;
+    
     // if (IdentificacaoBeneficiario) apiObject["IdentificacaoBeneficiario"] = IdentificacaoBeneficiario;
-    if (IdentificacaoPessoa) apiObject["IdentificacaoPessoa"] = IdentificacaoPessoa;
-    if (IdentificacaoPessoa) apiObject["CPFCNPJ"] = IdentificacaoPessoa;
-    if (DataNascimento) apiObject["DataNascimento"] = DataNascimento;
     // if (DataNascimento) apiObject["DataNascimento"] = '05-05-1993';
+    if (Nome) apiObject["Nome"] = Nome;
+    if (DataNascimento) apiObject["DataNascimento"] = DataNascimento;
     if (Email) apiObject["Email"] = Email;
     if (TelefoneCelular) apiObject["TelefoneCelular"] = TelefoneCelular;
-    if (CorporateId) apiObject["CorporateId"] = CorporateId;
-    if (CodigoContrato) apiObject["CodigoContrato"] = CodigoContrato;
-    if (TipoPessoa) apiObject["TipoPessoa"] = TipoPessoa;
-    if (BeneficiarioTitular) {
-        apiObject["BeneficiarioTitular"] = BeneficiarioTitular;
-    } else {
-        apiObject["BeneficiarioTitular"] = "";
-    }
     if (Sexo) apiObject["Sexo"] = Sexo;
-    if (StatusBeneficiario) apiObject["StatusBeneficiario"] = StatusBeneficiario;
-    if (IdentificacaoCliente) apiObject["IdentificacaoCliente"] = IdentificacaoCliente;
-    if (Produtos) apiObject["Produtos"] = Produtos;
-
+    if (IdentificacaoPessoa) apiObject["IdentificacaoPessoa"] = IdentificacaoPessoa;
+    if (IdentificacaoPessoa) apiObject["CPFCNPJ"] = IdentificacaoPessoa;
+    apiObject["BeneficiarioTitular"] = "";
+    apiObject["TipoPessoa"] = "1"; //Tipo titular!
+    
     var jsonString = JSON.stringify(apiObject, undefined, 2);
+
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', 'https://cors-anywhere.herokuapp.com/http://lifemanager.nextplus.com.br:9095/lifemanagerapihomologacao/lmapi/cadastro', true);
+    xhr.setRequestHeader("Content-Type", "application/json; charset=utf-8");
+    xhr.setRequestHeader('Authorization', 'Bearer ' + 'LEKuQBkDmKbtnBsCbQq70wRClD1MMLAmn3GRs5NLWA-FgUecs0ScGf3ebrMtmj28nRNAVI5JneiR4zNPwqZJqRPpXwA1cFyDFMbAR4dhU0vj5A3Obr2cqWGeEkMBmAmFThgJhDKlo1TVNlys7aH8l76kSMWML2p5u48Td2gAqXdXW5epZ30q4IruHooH5QELxfXp61lSxs2TtT4-29k9fxJjHtHgKHEPuu8CT6rH4-q5AdauqZpt3PeomTUvMGPNzLWMFM1T7-GyOE_qXtj3oqWwfjFwSo6iTP6l_IJNhfwt2o6V3CBqpzdaCPYlsYnm');
+    xhr.send(jsonString);
+    
+    // Create a root reference
+    var ref = firebase.storage();
+    var storageRef = ref.ref();
+    
+    storageRef.child('Ativos/' + Nome + '_' + DataNascimento + "_TITULAR").putString(jsonString, firebase.storage.StringFormat.RAW).then(function(snapshot) {
+        console.log('Uploaded string');
+    }).catch(function(error) {
+        console.log(error);
+    });
+    
+    // ----------------------Dados dependente 1---------------------------------------------
+    var key = document.getElementById("numero_dependentes").value;
+    if (key == "1" || key == "2" || key == 3) {
+        var apiObject2 = {};
+        apiObject2["CorporateId"] = CorporateId;
+        apiObject2["StatusBeneficiario"] = StatusBeneficiario;
+        apiObject2["IdentificacaoCliente"] = IdentificacaoCliente;
+        apiObject2["Produtos"] = Produtos;
+        apiObject2["CodigoContrato"] = CodigoContrato;
+
+        Nome = document.forms["my-form"]["nome_dependente"].value;
+        DataNascimento = document.forms["my-form"]["birthday_dependente"].value;
+        Email = document.forms["my-form"]["email_dependente"].value;
+        TelefoneCelular = document.forms["my-form"]["phone_dependente"].value;
+        Sexo = document.forms["my-form"]["sex_dependente"].value;
+        IdentificacaoPessoa = document.forms["my-form"]["cpf_dependente"].value;
+        var BeneficiarioTitular = document.forms["my-form"]["cpfcnpj"].value;
+        
+        cpfCorreto = checkCPF(IdentificacaoPessoa);
+        if (!cpfCorreto) {
+            alert("CPF dependente 1 inválido");
+            return false;
+        }
+        
+        // if (IdentificacaoBeneficiario) apiObject2["IdentificacaoBeneficiario"] = IdentificacaoBeneficiario;
+        // if (DataNascimento) apiObject2["DataNascimento"] = '05-05-1993';
+        if (Nome) apiObject2["Nome"] = Nome;
+        if (DataNascimento) apiObject2["DataNascimento"] = DataNascimento;
+        if (Email) apiObject2["Email"] = Email;
+        if (TelefoneCelular) apiObject2["TelefoneCelular"] = TelefoneCelular;
+        if (Sexo) apiObject2["Sexo"] = Sexo;
+        if (IdentificacaoPessoa) apiObject2["IdentificacaoPessoa"] = IdentificacaoPessoa;
+        if (IdentificacaoPessoa) apiObject2["CPFCNPJ"] = IdentificacaoPessoa;
+        apiObject2["BeneficiarioTitular"] = BeneficiarioTitular;
+        apiObject2["TipoPessoa"] = "2"; //Tipo dependente!
+
+        var jsonString2 = JSON.stringify(apiObject2, undefined, 2);
+
+        var xhr2 = new XMLHttpRequest();
+        xhr2.open('POST', 'https://cors-anywhere.herokuapp.com/http://lifemanager.nextplus.com.br:9095/lifemanagerapihomologacao/lmapi/cadastro', true);
+        xhr2.setRequestHeader("Content-Type", "application/json; charset=utf-8");
+        xhr2.setRequestHeader('Authorization', 'Bearer ' + 'LEKuQBkDmKbtnBsCbQq70wRClD1MMLAmn3GRs5NLWA-FgUecs0ScGf3ebrMtmj28nRNAVI5JneiR4zNPwqZJqRPpXwA1cFyDFMbAR4dhU0vj5A3Obr2cqWGeEkMBmAmFThgJhDKlo1TVNlys7aH8l76kSMWML2p5u48Td2gAqXdXW5epZ30q4IruHooH5QELxfXp61lSxs2TtT4-29k9fxJjHtHgKHEPuu8CT6rH4-q5AdauqZpt3PeomTUvMGPNzLWMFM1T7-GyOE_qXtj3oqWwfjFwSo6iTP6l_IJNhfwt2o6V3CBqpzdaCPYlsYnm');
+        xhr2.send(jsonString2);
+        
+        storageRef.child('Ativos/' + Nome + '_' + DataNascimento + "_DEPENDENTE_DO_" + BeneficiarioTitular).putString(jsonString2, firebase.storage.StringFormat.RAW).then(function(snapshot) {
+            console.log('Uploaded string');
+        }).catch(function(error) {
+            console.log(error);
+        });
+    }
+
+    // ----------------------Dados dependente 2--------------------------------------------
+    if (key == "2" || key == 3) {
+        var apiObject3 = {};
+        apiObject3["CorporateId"] = CorporateId;
+        apiObject3["StatusBeneficiario"] = StatusBeneficiario;
+        apiObject3["IdentificacaoCliente"] = IdentificacaoCliente;
+        apiObject3["Produtos"] = Produtos;
+        apiObject3["CodigoContrato"] = CodigoContrato;
+
+        Nome = document.forms["my-form"]["nome_dependente_2"].value;
+        DataNascimento = document.forms["my-form"]["birthday_dependente_2"].value;
+        Email = document.forms["my-form"]["email_dependente_2"].value;
+        TelefoneCelular = document.forms["my-form"]["phone_dependente_2"].value;
+        Sexo = document.forms["my-form"]["sex_dependente_2"].value;
+        IdentificacaoPessoa = document.forms["my-form"]["cpf_dependente_2"].value;
+        BeneficiarioTitular = document.forms["my-form"]["cpfcnpj"].value;
+        
+        cpfCorreto = checkCPF(IdentificacaoPessoa);
+        if (!cpfCorreto) {
+            alert("CPF dependente 2 inválido");
+            return false;
+        }
+        
+        // if (IdentificacaoBeneficiario) apiObject3["IdentificacaoBeneficiario"] = IdentificacaoBeneficiario;
+        // if (DataNascimento) apiObject3["DataNascimento"] = '05-05-1993';
+        if (Nome) apiObject3["Nome"] = Nome;
+        if (DataNascimento) apiObject3["DataNascimento"] = DataNascimento;
+        if (Email) apiObject3["Email"] = Email;
+        if (TelefoneCelular) apiObject3["TelefoneCelular"] = TelefoneCelular;
+        if (Sexo) apiObject3["Sexo"] = Sexo;
+        if (IdentificacaoPessoa) apiObject3["IdentificacaoPessoa"] = IdentificacaoPessoa;
+        if (IdentificacaoPessoa) apiObject3["CPFCNPJ"] = IdentificacaoPessoa;
+        apiObject3["BeneficiarioTitular"] = BeneficiarioTitular;
+        apiObject3["TipoPessoa"] = "2"; //Tipo dependente!
+
+        var jsonString3 = JSON.stringify(apiObject3, undefined, 2);
+
+        var xhr3 = new XMLHttpRequest();
+        xhr3.open('POST', 'https://cors-anywhere.herokuapp.com/http://lifemanager.nextplus.com.br:9095/lifemanagerapihomologacao/lmapi/cadastro', true);
+        xhr3.setRequestHeader("Content-Type", "application/json; charset=utf-8");
+        xhr3.setRequestHeader('Authorization', 'Bearer ' + 'LEKuQBkDmKbtnBsCbQq70wRClD1MMLAmn3GRs5NLWA-FgUecs0ScGf3ebrMtmj28nRNAVI5JneiR4zNPwqZJqRPpXwA1cFyDFMbAR4dhU0vj5A3Obr2cqWGeEkMBmAmFThgJhDKlo1TVNlys7aH8l76kSMWML2p5u48Td2gAqXdXW5epZ30q4IruHooH5QELxfXp61lSxs2TtT4-29k9fxJjHtHgKHEPuu8CT6rH4-q5AdauqZpt3PeomTUvMGPNzLWMFM1T7-GyOE_qXtj3oqWwfjFwSo6iTP6l_IJNhfwt2o6V3CBqpzdaCPYlsYnm');
+        xhr3.send(jsonString3);
+        
+        storageRef.child('Ativos/' + Nome + '_' + DataNascimento + "_DEPENDENTE_DO_" + BeneficiarioTitular).putString(jsonString3, firebase.storage.StringFormat.RAW).then(function(snapshot) {
+            console.log('Uploaded string');
+        }).catch(function(error) {
+            console.log(error);
+        });
+    }
+
+        // ----------------------Dados dependente 3--------------------------------------------
+        if (key == 3) {
+            var apiObject4 = {};
+            apiObject4["CorporateId"] = CorporateId;
+            apiObject4["StatusBeneficiario"] = StatusBeneficiario;
+            apiObject4["IdentificacaoCliente"] = IdentificacaoCliente;
+            apiObject4["Produtos"] = Produtos;
+            apiObject4["CodigoContrato"] = CodigoContrato;
+    
+            Nome = document.forms["my-form"]["nome_dependente_3"].value;
+            DataNascimento = document.forms["my-form"]["birthday_dependente_3"].value;
+            Email = document.forms["my-form"]["email_dependente_3"].value;
+            TelefoneCelular = document.forms["my-form"]["phone_dependente_3"].value;
+            Sexo = document.forms["my-form"]["sex_dependente_3"].value;
+            IdentificacaoPessoa = document.forms["my-form"]["cpf_dependente_3"].value;
+            BeneficiarioTitular = document.forms["my-form"]["cpfcnpj"].value;
+            
+            cpfCorreto = checkCPF(IdentificacaoPessoa);
+            if (!cpfCorreto) {
+                alert("CPF dependente 2 inválido");
+                return false;
+            }
+            
+            // if (IdentificacaoBeneficiario) apiObject4["IdentificacaoBeneficiario"] = IdentificacaoBeneficiario;
+            // if (DataNascimento) apiObject4["DataNascimento"] = '05-05-1993';
+            if (Nome) apiObject4["Nome"] = Nome;
+            if (DataNascimento) apiObject4["DataNascimento"] = DataNascimento;
+            if (Email) apiObject4["Email"] = Email;
+            if (TelefoneCelular) apiObject4["TelefoneCelular"] = TelefoneCelular;
+            if (Sexo) apiObject4["Sexo"] = Sexo;
+            if (IdentificacaoPessoa) apiObject4["IdentificacaoPessoa"] = IdentificacaoPessoa;
+            if (IdentificacaoPessoa) apiObject4["CPFCNPJ"] = IdentificacaoPessoa;
+            apiObject4["BeneficiarioTitular"] = BeneficiarioTitular;
+            apiObject4["TipoPessoa"] = "2"; //Tipo dependente!
+    
+            var jsonString4 = JSON.stringify(apiObject4, undefined, 2);
+    
+            var xhr4 = new XMLHttpRequest();
+            xhr4.open('POST', 'https://cors-anywhere.herokuapp.com/http://lifemanager.nextplus.com.br:9095/lifemanagerapihomologacao/lmapi/cadastro', true);
+            xhr4.setRequestHeader("Content-Type", "application/json; charset=utf-8");
+            xhr4.setRequestHeader('Authorization', 'Bearer ' + 'LEKuQBkDmKbtnBsCbQq70wRClD1MMLAmn3GRs5NLWA-FgUecs0ScGf3ebrMtmj28nRNAVI5JneiR4zNPwqZJqRPpXwA1cFyDFMbAR4dhU0vj5A3Obr2cqWGeEkMBmAmFThgJhDKlo1TVNlys7aH8l76kSMWML2p5u48Td2gAqXdXW5epZ30q4IruHooH5QELxfXp61lSxs2TtT4-29k9fxJjHtHgKHEPuu8CT6rH4-q5AdauqZpt3PeomTUvMGPNzLWMFM1T7-GyOE_qXtj3oqWwfjFwSo6iTP6l_IJNhfwt2o6V3CBqpzdaCPYlsYnm');
+            xhr4.send(jsonString4);
+            
+            storageRef.child('Ativos/' + Nome + '_' + DataNascimento + "_DEPENDENTE_DO_" + BeneficiarioTitular).putString(jsonString4, firebase.storage.StringFormat.RAW).then(function(snapshot) {
+                console.log('Uploaded string');
+            }).catch(function(error) {
+                console.log(error);
+            });
+        }
+
+
 
     // var params = {
     //     username: 'ads',
@@ -172,23 +334,23 @@ function sendData() {
     //     html => console.log(html)
     // );
 
-    var xhr = new XMLHttpRequest();
-    xhr.open('POST', 'https://cors-anywhere.herokuapp.com/http://lifemanager.nextplus.com.br:9095/lifemanagerapihomologacao/lmapi/cadastro', true);
-    xhr.setRequestHeader("Content-Type", "application/json; charset=utf-8");
-    xhr.setRequestHeader('Authorization', 'Bearer ' + 'LEKuQBkDmKbtnBsCbQq70wRClD1MMLAmn3GRs5NLWA-FgUecs0ScGf3ebrMtmj28nRNAVI5JneiR4zNPwqZJqRPpXwA1cFyDFMbAR4dhU0vj5A3Obr2cqWGeEkMBmAmFThgJhDKlo1TVNlys7aH8l76kSMWML2p5u48Td2gAqXdXW5epZ30q4IruHooH5QELxfXp61lSxs2TtT4-29k9fxJjHtHgKHEPuu8CT6rH4-q5AdauqZpt3PeomTUvMGPNzLWMFM1T7-GyOE_qXtj3oqWwfjFwSo6iTP6l_IJNhfwt2o6V3CBqpzdaCPYlsYnm');
-    xhr.send(jsonString);
-    alert("Cadastro realizado");
+    // var xhr = new XMLHttpRequest();
+    // xhr.open('POST', 'https://cors-anywhere.herokuapp.com/http://lifemanager.nextplus.com.br:9095/lifemanagerapihomologacao/lmapi/cadastro', true);
+    // xhr.setRequestHeader("Content-Type", "application/json; charset=utf-8");
+    // xhr.setRequestHeader('Authorization', 'Bearer ' + 'LEKuQBkDmKbtnBsCbQq70wRClD1MMLAmn3GRs5NLWA-FgUecs0ScGf3ebrMtmj28nRNAVI5JneiR4zNPwqZJqRPpXwA1cFyDFMbAR4dhU0vj5A3Obr2cqWGeEkMBmAmFThgJhDKlo1TVNlys7aH8l76kSMWML2p5u48Td2gAqXdXW5epZ30q4IruHooH5QELxfXp61lSxs2TtT4-29k9fxJjHtHgKHEPuu8CT6rH4-q5AdauqZpt3PeomTUvMGPNzLWMFM1T7-GyOE_qXtj3oqWwfjFwSo6iTP6l_IJNhfwt2o6V3CBqpzdaCPYlsYnm');
+    // xhr.send(jsonString);
+    // alert("Cadastro realizado");
 
-    // Create a root reference
-    var ref = firebase.storage();
-    var storageRef = ref.ref();
+    // // Create a root reference
+    // var ref = firebase.storage();
+    // var storageRef = ref.ref();
 
 
-    storageRef.child('Ativos/' + Nome + '_' + DataNascimento + marcaDependente).putString(jsonString, firebase.storage.StringFormat.RAW).then(function(snapshot) {
-        console.log('Uploaded string');
-    }).catch(function(error) {
-        console.log(error);
-    });
+    // storageRef.child('Ativos/' + Nome + '_' + DataNascimento + marcaDependente).putString(jsonString, firebase.storage.StringFormat.RAW).then(function(snapshot) {
+    //     console.log('Uploaded string');
+    // }).catch(function(error) {
+    //     console.log(error);
+    // });
 
     // document.getElementById("my-form").reset();
 

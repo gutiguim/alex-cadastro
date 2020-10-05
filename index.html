@@ -42,7 +42,7 @@
                     <main class="my-form">
                             <div class="container">
                                 <div class="row justify-content-center">
-                                    <div class="col-md-8">
+                                    <div class="col-md-12">
                                             <div class="card rounded-top-left rounded-bottom-right">
                                                 <div class="img-fluid padding-image">
                                                     <img src="./direto_com_doutor.png" alt="Direto com Doutor" class="rounded mx-auto d-block"  style="height: 100%; width: 250px; display: block;">
@@ -50,80 +50,225 @@
                                                 <div class="card-body">
                                                     <!-- <form name="my-form" onsubmit="return validform()" method=""> -->
                                                     <form name="my-form" onsubmit="return sendData()" method="">
-                                                        <div class="form-group row">
-                                                            <label for="person_type" class="col-md-4 col-form-label text-md-right">Tipo do beneficiário</label>
-                                                            <div class="col-md-6">
-                                                                <Select id="person_type" class="form-control" name="person_type" onchange="checkDependente()" required>
-                                                                    <option value="" selected>Escolha...</option>
-                                                                    <option value="1">Títular</option>
-                                                                    <option value="2">Dependente</option>
-                                                                </Select>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="form-group row">
-                                                            <label for="cpfcnpj" class="col-md-4 col-form-label text-md-right">CPF do titular (somente números)*</label>
-                                                            <div class="col-md-6">
-                                                                <input type="text" id="cpfcnpj" class="form-control" name="cpfcnpj" required oninvalid="this.setCustomValidity('Este campo não pode ficar em branco')" oninput="setCustomValidity('')">
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="form-group row">
-                                                            <label for="nome" class="col-md-4 col-form-label text-md-right">Nome completo do beneficiário*</label>
-                                                            <div class="col-md-6">
-                                                                <input type="text" id="nome" class="form-control" name="nome" required oninvalid="this.setCustomValidity('Este campo não pode ficar em branco')" oninput="setCustomValidity('')">
-                                                            </div>
-                                                        </div>
-
-                                                        <div id="dependant_div" class="form-group row" style="display: none;">
-                                                            <label for="cpf_dependente" class="col-md-4 col-form-label text-md-right">CPF do dependente (somente números)*</label>
-                                                            <div class="col-md-6">
-                                                                <input type="text" id="cpf_dependente" class="form-control" name="cpf_dependente">
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="form-group row">
-                                                            <label for="birthday" class="col-md-4 col-form-label text-md-right">Data de nascimento</label>
-                                                            <div class="col-md-6">
-                                                                <input type="date" id="birthday" class="form-control" name="birthday" required oninvalid="this.setCustomValidity('Este campo não pode ficar em branco')" oninput="setCustomValidity('')">
-                                                            </div>
-                                                        </div>
-            
-                                                        <div class="form-group row">
-                                                            <label for="email" class="col-md-4 col-form-label text-md-right">E-Mail</label>
-                                                            <div class="col-md-6">
-                                                                <input type="email" id="email" class="form-control" name="email">
-                                                            </div>
-                                                        </div>
-                        
-                                                        <div class="form-group row">
-                                                            <label for="phone" class="col-md-4 col-form-label text-md-right">Número do celular (somente números e com DDD)</label>
-                                                            <div class="col-md-6">
-                                                                <input type="text" id="phone" class="form-control" name="phone">
-                                                            </div>
-                                                        </div>
-                        
-                        
                                                         <div id="plan_div" class="form-group row">
                                                             <label for="plan" class="col-md-4 col-form-label text-md-right">Plano</label>
                                                             <div class="col-md-6">
-                                                                <Select id="plan" class="form-control" name="plan">
+                                                                <Select id="plan" class="form-control" name="plan" onchange="checkDependente()" required>
                                                                     <option value="" selected>Escolha...</option>
                                                                     <option value="57">Familiar</option>
                                                                     <option value="58">Individual</option>
                                                                 </Select>
                                                             </div>
                                                         </div>
-                                                                    
+
+                                                        <label for="Titular" class="col-md-12 col-form-label text-md-center sub-title">Titular</label>
                                                         <div class="form-group row">
-                                                            <label for="sex" class="col-md-4 col-form-label text-md-right">Sexo</label>
+                                                            <label for="nome_titular" class="col-md-4 col-form-label text-md-right">Nome completo</label>
                                                             <div class="col-md-6">
-                                                                <Select id="sex" class="form-control" name="sex" required>
+                                                                <input type="text" id="nome_titular" class="form-control" name="nome_titular" required oninvalid="this.setCustomValidity('Este campo não pode ficar em branco')" oninput="setCustomValidity('')">
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group row">
+                                                            <label for="cpfcnpj" class="col-md-4 col-form-label text-md-right">CPF (somente números)*</label>
+                                                            <div class="col-md-6">
+                                                                <input type="text" id="cpfcnpj" class="form-control" name="cpfcnpj" required oninvalid="this.setCustomValidity('Este campo não pode ficar em branco')" oninput="setCustomValidity('')">
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group row">
+                                                            <label for="birthday_titular" class="col-md-4 col-form-label text-md-right">Data de nascimento</label>
+                                                            <div class="col-md-6">
+                                                                <input type="date" id="birthday_titular" class="form-control" name="birthday_titular" required oninvalid="this.setCustomValidity('Este campo não pode ficar em branco')" oninput="setCustomValidity('')">
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group row">
+                                                            <label for="email_titular" class="col-md-4 col-form-label text-md-right">E-Mail</label>
+                                                            <div class="col-md-6">
+                                                                <input type="email_titular" id="email_titular" class="form-control" name="email_titular">
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group row">
+                                                            <label for="phone_titular" class="col-md-4 col-form-label text-md-right">Número do celular (somente números e com DDD)</label>
+                                                            <div class="col-md-6">
+                                                                <input type="text" id="phone_titular" class="form-control" name="phone_titular">
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group row">
+                                                            <label for="sex_titular" class="col-md-4 col-form-label text-md-right">Sexo</label>
+                                                            <div class="col-md-6">
+                                                                <Select id="sex_titular" class="form-control" name="sex_titular" required>
                                                                     <option value="" selected>Escolha...</option>
                                                                     <option value="M">Masculino</option>
                                                                     <option value="F">Feminino</option>
                                                                 </Select>
                                                             </div>
+                                                        </div>
+                                                        <br></br>
+
+                                                        <div id="dependant_div" >
+                                                            <label for="titulo_cadastro_dependentes" class="col-md-12 col-form-label text-md-center sub-title">Cadastro dependentes</label>
+                                                            <div id="numero_dependentes_div" class="form-group row">
+                                                                <label for="numero_dependentes" class="col-md-4 col-form-label text-md-right">Número de dependentes</label>
+                                                                <div class="col-md-6">
+                                                                    <Select id="numero_dependentes" class="form-control" name="numero_dependentes" onchange="checkQuantosFormularios()">
+                                                                        <option value="0" selected>Nenhum...</option>
+                                                                        <option value="1">1 dependente</option>
+                                                                        <option value="2">2 dependentes</option>
+                                                                        <option value="3">3 dependentes</option>
+                                                                    </Select>
+                                                                </div>
+                                                            </div>
+
+                                                            <div id="dependant_1_div" style="display: none;"> 
+                                                                <label for="titulo_dependente_1" class="col-md-12 col-form-label text-md-center sub-title">Dependente 1</label>
+                                                                <div class="form-group row" style="display: flex;">
+                                                                    <label for="nome_dependente" class="col-md-4 col-form-label text-md-right">Nome dependente 1</label>
+                                                                    <div class="col-md-6">
+                                                                        <input type="text" id="nome_dependente" class="form-control" name="nome_dependente">
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="form-group row" style="display: flex;">
+                                                                    <label for="cpf_dependente" class="col-md-4 col-form-label text-md-right">CPF dependente 1 (somente números)</label>
+                                                                    <div class="col-md-6">
+                                                                        <input type="text" id="cpf_dependente" class="form-control" name="cpf_dependente">
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="form-group row">
+                                                                    <label for="birthday_dependente" class="col-md-4 col-form-label text-md-right">Data de nascimento dependente 1</label>
+                                                                    <div class="col-md-6">
+                                                                        <input type="date" id="birthday_dependente" class="form-control" name="birthday_dependente">
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="form-group row" style="display: flex;">
+                                                                    <label for="email_dependente" class="col-md-4 col-form-label text-md-right">E-mail dependente 1</label>
+                                                                    <div class="col-md-6">
+                                                                        <input type="text" id="email_dependente" class="form-control" name="email_dependente">
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="form-group row">
+                                                                    <label for="phone_dependente" class="col-md-4 col-form-label text-md-right">Número do celular dependente 1 (somente números e com DDD)</label>
+                                                                    <div class="col-md-6">
+                                                                        <input type="text" id="phone_dependente" class="form-control" name="phone_dependente">
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="form-group row">
+                                                                    <label for="sex_dependente" class="col-md-4 col-form-label text-md-right">Sexo dependente 1</label>
+                                                                    <div class="col-md-6">
+                                                                        <Select id="sex_dependente" class="form-control" name="sex_dependente">
+                                                                            <option value="" selected>Escolha...</option>
+                                                                            <option value="M">Masculino</option>
+                                                                            <option value="F">Feminino</option>
+                                                                        </Select>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div id="dependant_2_div" style="display: none;"> 
+                                                                    <label for="titulo_dependente_2" class="col-md-12 col-form-label text-md-center sub-title">Dependente 2</label>
+                                                                    <div class="form-group row" style="display: flex;">
+                                                                        <label for="nome_dependente_2" class="col-md-4 col-form-label text-md-right">Nome dependente 2</label>
+                                                                        <div class="col-md-6">
+                                                                            <input type="text" id="nome_dependente_2" class="form-control" name="nome_dependente_2">
+                                                                        </div>
+                                                                    </div>
+    
+                                                                    <div class="form-group row" style="display: flex;">
+                                                                        <label for="cpf_dependente_2" class="col-md-4 col-form-label text-md-right">CPF dependente 2 (somente números)</label>
+                                                                        <div class="col-md-6">
+                                                                            <input type="text" id="cpf_dependente_2" class="form-control" name="cpf_dependente_2">
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="form-group row">
+                                                                        <label for="birthday_dependente_2" class="col-md-4 col-form-label text-md-right">Data de nascimento dependente 2</label>
+                                                                        <div class="col-md-6">
+                                                                            <input type="date" id="birthday_dependente_2" class="form-control" name="birthday_dependente_2">
+                                                                        </div>
+                                                                    </div>
+    
+                                                                    <div class="form-group row" style="display: flex;">
+                                                                        <label for="email_dependente_2" class="col-md-4 col-form-label text-md-right">E-mail dependente 2</label>
+                                                                        <div class="col-md-6">
+                                                                            <input type="text" id="email_dependente_2" class="form-control" name="email_dependente_2">
+                                                                        </div>
+                                                                    </div>
+    
+                                                                    <div class="form-group row">
+                                                                        <label for="phone_dependente_2" class="col-md-4 col-form-label text-md-right">Número do celular dependente 2 (somente números e com DDD)</label>
+                                                                        <div class="col-md-6">
+                                                                            <input type="text" id="phone_dependente_2" class="form-control" name="phone_dependente_2">
+                                                                        </div>
+                                                                    </div>
+    
+                                                                    <div class="form-group row">
+                                                                        <label for="sex_dependente_2" class="col-md-4 col-form-label text-md-right">Sexo dependente 2</label>
+                                                                        <div class="col-md-6">
+                                                                            <Select id="sex_dependente_2" class="form-control" name="sex_dependente_2">
+                                                                                <option value="" selected>Escolha...</option>
+                                                                                <option value="M">Masculino</option>
+                                                                                <option value="F">Feminino</option>
+                                                                            </Select>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div id="dependant_3_div" style="display: none;"> 
+                                                                    <label for="titulo_dependente_3" class="col-md-12 col-form-label text-md-center sub-title">Dependente 3</label>
+                                                                    <div class="form-group row" style="display: flex;">
+                                                                        <label for="nome_dependente_3" class="col-md-4 col-form-label text-md-right">Nome dependente 3</label>
+                                                                        <div class="col-md-6">
+                                                                            <input type="text" id="nome_dependente_3" class="form-control" name="nome_dependente_3">
+                                                                        </div>
+                                                                    </div>
+    
+                                                                    <div class="form-group row" style="display: flex;">
+                                                                        <label for="cpf_dependente_3" class="col-md-4 col-form-label text-md-right">CPF dependente 3 (somente números)</label>
+                                                                        <div class="col-md-6">
+                                                                            <input type="text" id="cpf_dependente_3" class="form-control" name="cpf_dependente_3">
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="form-group row">
+                                                                        <label for="birthday_dependente_3" class="col-md-4 col-form-label text-md-right">Data de nascimento dependente 3</label>
+                                                                        <div class="col-md-6">
+                                                                            <input type="date" id="birthday_dependente_3" class="form-control" name="birthday_dependente_3">
+                                                                        </div>
+                                                                    </div>
+    
+                                                                    <div class="form-group row" style="display: flex;">
+                                                                        <label for="email_dependente_3" class="col-md-4 col-form-label text-md-right">E-mail dependente 3</label>
+                                                                        <div class="col-md-6">
+                                                                            <input type="text" id="email_dependente_3" class="form-control" name="email_dependente_3">
+                                                                        </div>
+                                                                    </div>
+    
+                                                                    <div class="form-group row">
+                                                                        <label for="phone_dependente_3" class="col-md-4 col-form-label text-md-right">Número do celular dependente 3 (somente números e com DDD)</label>
+                                                                        <div class="col-md-6">
+                                                                            <input type="text" id="phone_dependente_3" class="form-control" name="phone_dependente_3">
+                                                                        </div>
+                                                                    </div>
+    
+                                                                    <div class="form-group row">
+                                                                        <label for="sex_dependente_2" class="col-md-4 col-form-label text-md-right">Sexo dependente 3</label>
+                                                                        <div class="col-md-6">
+                                                                            <Select id="sex_dependente_3" class="form-control" name="sex_dependente_3">
+                                                                                <option value="" selected>Escolha...</option>
+                                                                                <option value="M">Masculino</option>
+                                                                                <option value="F">Feminino</option>
+                                                                            </Select>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
                                                         </div>
             
                                                         <!-- <div class="form-group row">
