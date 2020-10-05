@@ -93,11 +93,13 @@ function sendData() {
     var cpfCorreto = checkCPF(IdentificacaoPessoa);
     if (!cpfCorreto) {
         alert("CPF titular inválido");
+        cadastrarButton.innerHTML = "Cadastrar"
         return false;
     }
     
     if (CodigoContrato == "") {
         alert("Escolha um plano");
+        cadastrarButton.innerHTML = "Cadastrar"
         return false;
     }
     
@@ -175,6 +177,7 @@ function sendData() {
         cpfCorreto = checkCPF(IdentificacaoPessoa);
         if (!cpfCorreto) {
             alert("CPF dependente 1 inválido");
+            cadastrarButton.innerHTML = "Cadastrar"
             return false;
         }
         
@@ -239,6 +242,7 @@ function sendData() {
         cpfCorreto = checkCPF(IdentificacaoPessoa);
         if (!cpfCorreto) {
             alert("CPF dependente 2 inválido");
+            cadastrarButton.innerHTML = "Cadastrar"
             return false;
         }
         
@@ -299,6 +303,7 @@ function sendData() {
         cpfCorreto = checkCPF(IdentificacaoPessoa);
         if (!cpfCorreto) {
             alert("CPF dependente 2 inválido");
+            cadastrarButton.innerHTML = "Cadastrar"
             return false;
         }
         
