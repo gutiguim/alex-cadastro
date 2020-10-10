@@ -68,6 +68,7 @@ function sendData() {
     var numeroApiCalls = 4;
     var cadastrarButton = document.getElementById("cadastrar_button");
     cadastrarButton.innerHTML = "Aguarde..."
+    var cpfTitularParaVerificacaoCPF = "";
 
     var CorporateId = "39";
     var StatusBeneficiario = "A";
@@ -91,6 +92,7 @@ function sendData() {
     var IdentificacaoPessoa = document.forms["my-form"]["cpfcnpj"].value;
     
     var cpfCorreto = checkCPF(IdentificacaoPessoa);
+    cpfTitularParaVerificacaoCPF = IdentificacaoPessoa;
     if (!cpfCorreto) {
         alert("CPF titular inválido");
         cadastrarButton.innerHTML = "Cadastrar"
@@ -175,7 +177,7 @@ function sendData() {
         var BeneficiarioTitular = document.forms["my-form"]["cpfcnpj"].value;
         
         cpfCorreto = checkCPF(IdentificacaoPessoa);
-        if (!cpfCorreto) {
+        if (!cpfCorreto && IdentificacaoPessoa != (cpfTitularParaVerificacaoCPF + "1")) {
             alert("CPF dependente 1 inválido");
             cadastrarButton.innerHTML = "Cadastrar"
             return false;
@@ -240,7 +242,7 @@ function sendData() {
         BeneficiarioTitular = document.forms["my-form"]["cpfcnpj"].value;
         
         cpfCorreto = checkCPF(IdentificacaoPessoa);
-        if (!cpfCorreto) {
+        if (!cpfCorreto && IdentificacaoPessoa != (cpfTitularParaVerificacaoCPF + "2")) {
             alert("CPF dependente 2 inválido");
             cadastrarButton.innerHTML = "Cadastrar"
             return false;
@@ -301,7 +303,7 @@ function sendData() {
         BeneficiarioTitular = document.forms["my-form"]["cpfcnpj"].value;
         
         cpfCorreto = checkCPF(IdentificacaoPessoa);
-        if (!cpfCorreto) {
+        if (!cpfCorreto && IdentificacaoPessoa != (cpfTitularParaVerificacaoCPF + "3")) {
             alert("CPF dependente 2 inválido");
             cadastrarButton.innerHTML = "Cadastrar"
             return false;
