@@ -68,6 +68,7 @@ function sendData() {
     var numeroApiCalls = 4;
     var cadastrarButton = document.getElementById("cadastrar_button");
     cadastrarButton.innerHTML = "Aguarde..."
+    var cpfTitularParaVerificacaoCPF = "";
 
     var CorporateId = "39";
     var StatusBeneficiario = "A";
@@ -89,6 +90,14 @@ function sendData() {
     var TelefoneCelular = document.forms["my-form"]["phone_titular"].value;
     var Sexo = document.forms["my-form"]["sex_titular"].value;
     var IdentificacaoPessoa = document.forms["my-form"]["cpfcnpj"].value;
+    
+    var cpfCorreto = checkCPF(IdentificacaoPessoa);
+    cpfTitularParaVerificacaoCPF = IdentificacaoPessoa;
+    if (!cpfCorreto) {
+        alert("CPF titular inválido");
+        cadastrarButton.innerHTML = "Cadastrar"
+        return false;
+    }
     
     if (CodigoContrato == "") {
         alert("Escolha um plano");
@@ -167,6 +176,13 @@ function sendData() {
         IdentificacaoPessoa = document.forms["my-form"]["cpf_dependente"].value;
         var BeneficiarioTitular = document.forms["my-form"]["cpfcnpj"].value;
         
+        cpfCorreto = checkCPF(IdentificacaoPessoa);
+        if (!cpfCorreto && IdentificacaoPessoa != (cpfTitularParaVerificacaoCPF + "1")) {
+            alert("CPF dependente 1 inválido");
+            cadastrarButton.innerHTML = "Cadastrar"
+            return false;
+        }
+        
         // if (IdentificacaoBeneficiario) apiObject2["IdentificacaoBeneficiario"] = IdentificacaoBeneficiario;
         // if (DataNascimento) apiObject2["DataNascimento"] = '05-05-1993';
         if (Nome) apiObject2["Nome"] = Nome;
@@ -225,6 +241,13 @@ function sendData() {
         IdentificacaoPessoa = document.forms["my-form"]["cpf_dependente_2"].value;
         BeneficiarioTitular = document.forms["my-form"]["cpfcnpj"].value;
         
+        cpfCorreto = checkCPF(IdentificacaoPessoa);
+        if (!cpfCorreto && IdentificacaoPessoa != (cpfTitularParaVerificacaoCPF + "2")) {
+            alert("CPF dependente 2 inválido");
+            cadastrarButton.innerHTML = "Cadastrar"
+            return false;
+        }
+        
         // if (IdentificacaoBeneficiario) apiObject3["IdentificacaoBeneficiario"] = IdentificacaoBeneficiario;
         // if (DataNascimento) apiObject3["DataNascimento"] = '05-05-1993';
         if (Nome) apiObject3["Nome"] = Nome;
@@ -278,6 +301,13 @@ function sendData() {
         Sexo = document.forms["my-form"]["sex_dependente_3"].value;
         IdentificacaoPessoa = document.forms["my-form"]["cpf_dependente_3"].value;
         BeneficiarioTitular = document.forms["my-form"]["cpfcnpj"].value;
+        
+        cpfCorreto = checkCPF(IdentificacaoPessoa);
+        if (!cpfCorreto && IdentificacaoPessoa != (cpfTitularParaVerificacaoCPF + "3")) {
+            alert("CPF dependente 2 inválido");
+            cadastrarButton.innerHTML = "Cadastrar"
+            return false;
+        }
         
         // if (IdentificacaoBeneficiario) apiObject4["IdentificacaoBeneficiario"] = IdentificacaoBeneficiario;
         // if (DataNascimento) apiObject4["DataNascimento"] = '05-05-1993';
