@@ -133,30 +133,39 @@ function sendData() {
     xhr.setRequestHeader('Authorization', 'Bearer ' + 'c_JARVQxQncnxpwpfU2xjSA7y_09M35qMIZRugWztIwMe1B-PL8n3PILQW88LbD7APCsnlQMSOmL9N_fDDtOIhKfnDwMF9kOdF-eDnRQZFgId0QPwHek83fa5CEK0Js6z8RgJZjcLN1QYKtPRN79SdUNu5WovwMPP9ysHn3m186d7Ht1fLxjAkLzQkzrPJHey7jvzpqKww_1Zz3eaVsTJrn4DDZ_pS2yodeObxrXBlFA217Vvuj4l2w_Nw58m6mb45vWZsHXtw_h7fT2IMbTsDJIH01mHIhMlL0KtA6HIX9lG7QHaI9C2BOn9-W3fJ3I');
     xhr.send(jsonString);
 
-    // resultadoApiCalls
-    xhr.onload = function() {
-            if (xhr.status != 200) { // analyze HTTP status of the response
-                resultadoApiCalls = resultadoApiCalls + "Titular: Erro ao cadastrar Titular \n";
-                numeroApiCalls = numeroApiCalls -1;
-            } else { // show the result
-                resultadoApiCalls = resultadoApiCalls + "Titular: Cadastrado \n";
-                numeroApiCalls = numeroApiCalls -1;
-            }
-        };
-        
-        xhr.onerror = function() {
-            alert("Request failed");
-    };
-    
+    let terminouXHRTitular = false;
     // Create a root reference
     var ref = firebase.storage();
     var storageRef = ref.ref();
+
+    // resultadoApiCalls
+    xhr.onload = function() {
+        if (xhr.status != 200) { // analyze HTTP status of the response
+            resultadoApiCalls = resultadoApiCalls + "Titular: Erro ao cadastrar Titular \n";
+            numeroApiCalls = numeroApiCalls -1;
+            terminouXHRTitular = true;
+            
+            storageRef.child('Ativos/' + Nome + '_' + DataNascimento + "_TITULAR").putString(jsonString, firebase.storage.StringFormat.RAW).then(function(snapshot) {
+                console.log('Uploaded string');
+            }).catch(function(error) {
+                console.log(error);
+            });
+        } else { // show the result
+            resultadoApiCalls = resultadoApiCalls + "Titular: Cadastrado \n";
+            numeroApiCalls = numeroApiCalls -1;
+            terminouXHRTitular = true
+        }
+    };
     
-    storageRef.child('Ativos/' + Nome + '_' + DataNascimento + "_TITULAR").putString(jsonString, firebase.storage.StringFormat.RAW).then(function(snapshot) {
-        console.log('Uploaded string');
-    }).catch(function(error) {
-        console.log(error);
-    });
+    xhr.onerror = function() {
+        alert("Request failed");
+    };
+
+    let tempoRolando = setInterval(function(){ 
+        if (terminouXHRTitular) {
+            clearInterval(tempoRolando)
+        }
+    }, 1000);
     
     // ----------------------Dados dependente 1---------------------------------------------
     var key = document.getElementById("numero_dependentes").value;
@@ -207,21 +216,22 @@ function sendData() {
             if (xhr2.status != 200) { // analyze HTTP status of the response
                 resultadoApiCalls = resultadoApiCalls + "Dependente 1: Erro ao cadastrar dependente 1 \n";
                 numeroApiCalls = numeroApiCalls -1;
+
+                storageRef.child('Ativos/' + Nome + '_' + DataNascimento + "_DEPENDENTE_DO_" + BeneficiarioTitular).putString(jsonString2, firebase.storage.StringFormat.RAW).then(function(snapshot) {
+                    console.log('Uploaded string');
+                }).catch(function(error) {
+                    console.log(error);
+                });
             } else { // show the result
                 resultadoApiCalls = resultadoApiCalls + "Dependente 1: Cadastrado \n";
                 numeroApiCalls = numeroApiCalls -1;
             }
         };
         
-        xhr.onerror = function() {
+        xhr2.onerror = function() {
             alert("Request failed");
-    };
+        };
 
-        storageRef.child('Ativos/' + Nome + '_' + DataNascimento + "_DEPENDENTE_DO_" + BeneficiarioTitular).putString(jsonString2, firebase.storage.StringFormat.RAW).then(function(snapshot) {
-            console.log('Uploaded string');
-        }).catch(function(error) {
-            console.log(error);
-        });
     }
 
     // ----------------------Dados dependente 2--------------------------------------------
@@ -272,17 +282,18 @@ function sendData() {
             if (xhr3.status != 200) { // analyze HTTP status of the response
                 resultadoApiCalls = resultadoApiCalls + "Dependente 2: Erro ao cadastrar dependente 2 \n"
                 numeroApiCalls = numeroApiCalls -1;
+
+                storageRef.child('Ativos/' + Nome + '_' + DataNascimento + "_DEPENDENTE_DO_" + BeneficiarioTitular).putString(jsonString3, firebase.storage.StringFormat.RAW).then(function(snapshot) {
+                    console.log('Uploaded string');
+                }).catch(function(error) {
+                    console.log(error);
+                });
             } else { // show the result
                 resultadoApiCalls = resultadoApiCalls + "Dependente 2: Cadastrado \n"
                 numeroApiCalls = numeroApiCalls -1;
             }
         };
 
-        storageRef.child('Ativos/' + Nome + '_' + DataNascimento + "_DEPENDENTE_DO_" + BeneficiarioTitular).putString(jsonString3, firebase.storage.StringFormat.RAW).then(function(snapshot) {
-            console.log('Uploaded string');
-        }).catch(function(error) {
-            console.log(error);
-        });
     }
 
     // ----------------------Dados dependente 3--------------------------------------------
@@ -333,17 +344,18 @@ function sendData() {
             if (xhr4.status != 200) { // analyze HTTP status of the response
                 resultadoApiCalls = resultadoApiCalls + "Dependente 3: Erro ao cadastrar dependente 3 \n";
                 numeroApiCalls = numeroApiCalls -1;
+
+                storageRef.child('Ativos/' + Nome + '_' + DataNascimento + "_DEPENDENTE_DO_" + BeneficiarioTitular).putString(jsonString4, firebase.storage.StringFormat.RAW).then(function(snapshot) {
+                    console.log('Uploaded string');
+                }).catch(function(error) {
+                    console.log(error);
+                });
             } else { // show the result
                 resultadoApiCalls = resultadoApiCalls + "Dependente 3: Cadastrado \n"
                 numeroApiCalls = numeroApiCalls -1;
             }
         };
 
-        storageRef.child('Ativos/' + Nome + '_' + DataNascimento + "_DEPENDENTE_DO_" + BeneficiarioTitular).putString(jsonString4, firebase.storage.StringFormat.RAW).then(function(snapshot) {
-            console.log('Uploaded string');
-        }).catch(function(error) {
-            console.log(error);
-        });
     }
 
     if (key == 2) {
