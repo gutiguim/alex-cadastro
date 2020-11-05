@@ -159,6 +159,7 @@ function sendData() {
     
     xhr.onerror = function() {
         alert("Request failed");
+        terminouXHRTitular = true
     };
 
     let tempoRolando = setInterval(function(){ 
