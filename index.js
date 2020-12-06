@@ -130,7 +130,7 @@ function sendData() {
     var xhr = new XMLHttpRequest();
     xhr.open('POST', 'https://cors-anywhere.herokuapp.com/http://lifemanager.nextplus.com.br:9095/lifemanagerapi/lmapi/cadastro', true);
     xhr.setRequestHeader("Content-Type", "application/json; charset=utf-8");
-    xhr.setRequestHeader('Authorization', 'Bearer ' + 'Qpu858ppnBSRSBZv7Q0t51iYPOUJBil9KK6_YzFISfQfW2e-2i3fAxmBP76n1ZbMIN0FmDySYuZBeJ3PVrEVcTLU4TJk96zRQXxEJbWq4ObNemHD68OnszmSGc8o503DsVJOq7IOtm-mitsytNtSFo7NIDBTD4qthMcwLdiJVHFX_WWopk7V8YXq22ix0hMOIa6ukChvW25MQ0r0dac1_60z9yHTB53Fk4Qx-VWisX56erhBEwwaFGR769_OAGkUGC8E3VkMT41bLf6amXzBg7pIbvZt5Pke37yiPAz8TxThp8d2tSBIQwvL_J_k75WF');
+    xhr.setRequestHeader('Authorization', 'Bearer ' + 'Xs-mxh7mDOTrVxcDdxayQQNLCDtsxlb4ppH14eLFEOZLSnmkHJdoClyCXRRQQ6NZ9hv2yARGFjaAkHQM8gxcJBbPPe1KxzLDHgbHVL3ZDwe5brAdRTZFIJ8XHplSiOXHWZpZUEp-CsgBTymP2v5DMoPl6Z8YxVduXKvUazrvREFNmQUjfY8aO8I3ay0Pt_KsObIUg8DckNGUvQwDn1hl8sei5kFAL7nFCuNGfM7-wLKwqnuPMLjA2F_nlGeDEg_vQAANl6P0toZz14mBHEjFIFjZWs4NL4zdiEXuipa3Cs910xT-GE4oJPaxHfNGEqFL');
     xhr.send(jsonString);
 
     let terminouXHRTitular = false;
@@ -144,16 +144,16 @@ function sendData() {
             resultadoApiCalls = resultadoApiCalls + "Titular: Erro ao cadastrar Titular \n";
             numeroApiCalls = numeroApiCalls -1;
             terminouXHRTitular = true;
-            
+        } else { // show the result
+            resultadoApiCalls = resultadoApiCalls + "Titular: Cadastrado \n";
+            numeroApiCalls = numeroApiCalls -1;
+            terminouXHRTitular = true;
+
             storageRef.child('Ativos/' + Nome + '_' + DataNascimento + "_TITULAR").putString(jsonString, firebase.storage.StringFormat.RAW).then(function(snapshot) {
                 console.log('Uploaded string');
             }).catch(function(error) {
                 console.log(error);
             });
-        } else { // show the result
-            resultadoApiCalls = resultadoApiCalls + "Titular: Cadastrado \n";
-            numeroApiCalls = numeroApiCalls -1;
-            terminouXHRTitular = true
         }
     };
     
@@ -210,12 +210,15 @@ function sendData() {
         var xhr2 = new XMLHttpRequest();
         xhr2.open('POST', 'https://cors-anywhere.herokuapp.com/http://lifemanager.nextplus.com.br:9095/lifemanagerapi/lmapi/cadastro', true);
         xhr2.setRequestHeader("Content-Type", "application/json; charset=utf-8");
-        xhr2.setRequestHeader('Authorization', 'Bearer ' + 'Qpu858ppnBSRSBZv7Q0t51iYPOUJBil9KK6_YzFISfQfW2e-2i3fAxmBP76n1ZbMIN0FmDySYuZBeJ3PVrEVcTLU4TJk96zRQXxEJbWq4ObNemHD68OnszmSGc8o503DsVJOq7IOtm-mitsytNtSFo7NIDBTD4qthMcwLdiJVHFX_WWopk7V8YXq22ix0hMOIa6ukChvW25MQ0r0dac1_60z9yHTB53Fk4Qx-VWisX56erhBEwwaFGR769_OAGkUGC8E3VkMT41bLf6amXzBg7pIbvZt5Pke37yiPAz8TxThp8d2tSBIQwvL_J_k75WF');
+        xhr2.setRequestHeader('Authorization', 'Bearer ' + 'Xs-mxh7mDOTrVxcDdxayQQNLCDtsxlb4ppH14eLFEOZLSnmkHJdoClyCXRRQQ6NZ9hv2yARGFjaAkHQM8gxcJBbPPe1KxzLDHgbHVL3ZDwe5brAdRTZFIJ8XHplSiOXHWZpZUEp-CsgBTymP2v5DMoPl6Z8YxVduXKvUazrvREFNmQUjfY8aO8I3ay0Pt_KsObIUg8DckNGUvQwDn1hl8sei5kFAL7nFCuNGfM7-wLKwqnuPMLjA2F_nlGeDEg_vQAANl6P0toZz14mBHEjFIFjZWs4NL4zdiEXuipa3Cs910xT-GE4oJPaxHfNGEqFL');
         xhr2.send(jsonString2);
         
         xhr2.onload = function() {
             if (xhr2.status != 200) { // analyze HTTP status of the response
                 resultadoApiCalls = resultadoApiCalls + "Dependente 1: Erro ao cadastrar dependente 1 \n";
+                numeroApiCalls = numeroApiCalls -1;
+            } else { // show the result
+                resultadoApiCalls = resultadoApiCalls + "Dependente 1: Cadastrado \n";
                 numeroApiCalls = numeroApiCalls -1;
 
                 storageRef.child('Ativos/' + Nome + '_' + DataNascimento + "_DEPENDENTE_DO_" + BeneficiarioTitular).putString(jsonString2, firebase.storage.StringFormat.RAW).then(function(snapshot) {
@@ -223,9 +226,6 @@ function sendData() {
                 }).catch(function(error) {
                     console.log(error);
                 });
-            } else { // show the result
-                resultadoApiCalls = resultadoApiCalls + "Dependente 1: Cadastrado \n";
-                numeroApiCalls = numeroApiCalls -1;
             }
         };
         
@@ -276,12 +276,15 @@ function sendData() {
         var xhr3 = new XMLHttpRequest();
         xhr3.open('POST', 'https://cors-anywhere.herokuapp.com/http://lifemanager.nextplus.com.br:9095/lifemanagerapi/lmapi/cadastro', true);
         xhr3.setRequestHeader("Content-Type", "application/json; charset=utf-8");
-        xhr3.setRequestHeader('Authorization', 'Bearer ' + 'Qpu858ppnBSRSBZv7Q0t51iYPOUJBil9KK6_YzFISfQfW2e-2i3fAxmBP76n1ZbMIN0FmDySYuZBeJ3PVrEVcTLU4TJk96zRQXxEJbWq4ObNemHD68OnszmSGc8o503DsVJOq7IOtm-mitsytNtSFo7NIDBTD4qthMcwLdiJVHFX_WWopk7V8YXq22ix0hMOIa6ukChvW25MQ0r0dac1_60z9yHTB53Fk4Qx-VWisX56erhBEwwaFGR769_OAGkUGC8E3VkMT41bLf6amXzBg7pIbvZt5Pke37yiPAz8TxThp8d2tSBIQwvL_J_k75WF');
+        xhr3.setRequestHeader('Authorization', 'Bearer ' + 'Xs-mxh7mDOTrVxcDdxayQQNLCDtsxlb4ppH14eLFEOZLSnmkHJdoClyCXRRQQ6NZ9hv2yARGFjaAkHQM8gxcJBbPPe1KxzLDHgbHVL3ZDwe5brAdRTZFIJ8XHplSiOXHWZpZUEp-CsgBTymP2v5DMoPl6Z8YxVduXKvUazrvREFNmQUjfY8aO8I3ay0Pt_KsObIUg8DckNGUvQwDn1hl8sei5kFAL7nFCuNGfM7-wLKwqnuPMLjA2F_nlGeDEg_vQAANl6P0toZz14mBHEjFIFjZWs4NL4zdiEXuipa3Cs910xT-GE4oJPaxHfNGEqFL');
         xhr3.send(jsonString3);
         
         xhr3.onload = function() {
             if (xhr3.status != 200) { // analyze HTTP status of the response
                 resultadoApiCalls = resultadoApiCalls + "Dependente 2: Erro ao cadastrar dependente 2 \n"
+                numeroApiCalls = numeroApiCalls -1;
+            } else { // show the result
+                resultadoApiCalls = resultadoApiCalls + "Dependente 2: Cadastrado \n"
                 numeroApiCalls = numeroApiCalls -1;
 
                 storageRef.child('Ativos/' + Nome + '_' + DataNascimento + "_DEPENDENTE_DO_" + BeneficiarioTitular).putString(jsonString3, firebase.storage.StringFormat.RAW).then(function(snapshot) {
@@ -289,9 +292,6 @@ function sendData() {
                 }).catch(function(error) {
                     console.log(error);
                 });
-            } else { // show the result
-                resultadoApiCalls = resultadoApiCalls + "Dependente 2: Cadastrado \n"
-                numeroApiCalls = numeroApiCalls -1;
             }
         };
 
@@ -338,12 +338,15 @@ function sendData() {
         var xhr4 = new XMLHttpRequest();
         xhr4.open('POST', 'https://cors-anywhere.herokuapp.com/http://lifemanager.nextplus.com.br:9095/lifemanagerapi/lmapi/cadastro', true);
         xhr4.setRequestHeader("Content-Type", "application/json; charset=utf-8");
-        xhr4.setRequestHeader('Authorization', 'Bearer ' + 'Qpu858ppnBSRSBZv7Q0t51iYPOUJBil9KK6_YzFISfQfW2e-2i3fAxmBP76n1ZbMIN0FmDySYuZBeJ3PVrEVcTLU4TJk96zRQXxEJbWq4ObNemHD68OnszmSGc8o503DsVJOq7IOtm-mitsytNtSFo7NIDBTD4qthMcwLdiJVHFX_WWopk7V8YXq22ix0hMOIa6ukChvW25MQ0r0dac1_60z9yHTB53Fk4Qx-VWisX56erhBEwwaFGR769_OAGkUGC8E3VkMT41bLf6amXzBg7pIbvZt5Pke37yiPAz8TxThp8d2tSBIQwvL_J_k75WF');
+        xhr4.setRequestHeader('Authorization', 'Bearer ' + 'Xs-mxh7mDOTrVxcDdxayQQNLCDtsxlb4ppH14eLFEOZLSnmkHJdoClyCXRRQQ6NZ9hv2yARGFjaAkHQM8gxcJBbPPe1KxzLDHgbHVL3ZDwe5brAdRTZFIJ8XHplSiOXHWZpZUEp-CsgBTymP2v5DMoPl6Z8YxVduXKvUazrvREFNmQUjfY8aO8I3ay0Pt_KsObIUg8DckNGUvQwDn1hl8sei5kFAL7nFCuNGfM7-wLKwqnuPMLjA2F_nlGeDEg_vQAANl6P0toZz14mBHEjFIFjZWs4NL4zdiEXuipa3Cs910xT-GE4oJPaxHfNGEqFL');
         xhr4.send(jsonString4);
         
         xhr4.onload = function() {
             if (xhr4.status != 200) { // analyze HTTP status of the response
                 resultadoApiCalls = resultadoApiCalls + "Dependente 3: Erro ao cadastrar dependente 3 \n";
+                numeroApiCalls = numeroApiCalls -1;
+            } else { // show the result
+                resultadoApiCalls = resultadoApiCalls + "Dependente 3: Cadastrado \n"
                 numeroApiCalls = numeroApiCalls -1;
 
                 storageRef.child('Ativos/' + Nome + '_' + DataNascimento + "_DEPENDENTE_DO_" + BeneficiarioTitular).putString(jsonString4, firebase.storage.StringFormat.RAW).then(function(snapshot) {
@@ -351,9 +354,6 @@ function sendData() {
                 }).catch(function(error) {
                     console.log(error);
                 });
-            } else { // show the result
-                resultadoApiCalls = resultadoApiCalls + "Dependente 3: Cadastrado \n"
-                numeroApiCalls = numeroApiCalls -1;
             }
         };
 
@@ -437,7 +437,7 @@ function sendData() {
     // var xhr = new XMLHttpRequest();
     // xhr.open('POST', 'https://cors-anywhere.herokuapp.com/http://lifemanager.nextplus.com.br:9095/lifemanagerapihomologacao/lmapi/cadastro', true);
     // xhr.setRequestHeader("Content-Type", "application/json; charset=utf-8");
-    // xhr.setRequestHeader('Authorization', 'Bearer ' + 'Qpu858ppnBSRSBZv7Q0t51iYPOUJBil9KK6_YzFISfQfW2e-2i3fAxmBP76n1ZbMIN0FmDySYuZBeJ3PVrEVcTLU4TJk96zRQXxEJbWq4ObNemHD68OnszmSGc8o503DsVJOq7IOtm-mitsytNtSFo7NIDBTD4qthMcwLdiJVHFX_WWopk7V8YXq22ix0hMOIa6ukChvW25MQ0r0dac1_60z9yHTB53Fk4Qx-VWisX56erhBEwwaFGR769_OAGkUGC8E3VkMT41bLf6amXzBg7pIbvZt5Pke37yiPAz8TxThp8d2tSBIQwvL_J_k75WF');
+    // xhr.setRequestHeader('Authorization', 'Bearer ' + 'Xs-mxh7mDOTrVxcDdxayQQNLCDtsxlb4ppH14eLFEOZLSnmkHJdoClyCXRRQQ6NZ9hv2yARGFjaAkHQM8gxcJBbPPe1KxzLDHgbHVL3ZDwe5brAdRTZFIJ8XHplSiOXHWZpZUEp-CsgBTymP2v5DMoPl6Z8YxVduXKvUazrvREFNmQUjfY8aO8I3ay0Pt_KsObIUg8DckNGUvQwDn1hl8sei5kFAL7nFCuNGfM7-wLKwqnuPMLjA2F_nlGeDEg_vQAANl6P0toZz14mBHEjFIFjZWs4NL4zdiEXuipa3Cs910xT-GE4oJPaxHfNGEqFL');
     // xhr.send(jsonString);
     // alert("Cadastro realizado");
 
