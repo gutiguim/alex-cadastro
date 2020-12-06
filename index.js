@@ -107,7 +107,7 @@ function sendData() {
     
     // if (IdentificacaoBeneficiario) apiObject["IdentificacaoBeneficiario"] = IdentificacaoBeneficiario;
     // if (DataNascimento) apiObject["DataNascimento"] = '05-05-1993';
-    if (Nome) apiObject["Nome"] = Nome;
+    if (Nome) apiObject["Nome"] = Nome.toLowerCase();
     if (DataNascimento) apiObject["DataNascimento"] = DataNascimento;
     if (Email) apiObject["Email"] = Email;
     if (TelefoneCelular) apiObject["TelefoneCelular"] = TelefoneCelular;
@@ -195,7 +195,7 @@ function sendData() {
         
         // if (IdentificacaoBeneficiario) apiObject2["IdentificacaoBeneficiario"] = IdentificacaoBeneficiario;
         // if (DataNascimento) apiObject2["DataNascimento"] = '05-05-1993';
-        if (Nome) apiObject2["Nome"] = Nome;
+        if (Nome) apiObject2["Nome"] = Nome.toLowerCase();
         if (DataNascimento) apiObject2["DataNascimento"] = DataNascimento;
         if (Email) apiObject2["Email"] = Email;
         if (TelefoneCelular) apiObject2["TelefoneCelular"] = TelefoneCelular;
@@ -261,7 +261,7 @@ function sendData() {
         
         // if (IdentificacaoBeneficiario) apiObject3["IdentificacaoBeneficiario"] = IdentificacaoBeneficiario;
         // if (DataNascimento) apiObject3["DataNascimento"] = '05-05-1993';
-        if (Nome) apiObject3["Nome"] = Nome;
+        if (Nome) apiObject3["Nome"] = Nome.toLowerCase();
         if (DataNascimento) apiObject3["DataNascimento"] = DataNascimento;
         if (Email) apiObject3["Email"] = Email;
         if (TelefoneCelular) apiObject3["TelefoneCelular"] = TelefoneCelular;
@@ -323,7 +323,7 @@ function sendData() {
         
         // if (IdentificacaoBeneficiario) apiObject4["IdentificacaoBeneficiario"] = IdentificacaoBeneficiario;
         // if (DataNascimento) apiObject4["DataNascimento"] = '05-05-1993';
-        if (Nome) apiObject4["Nome"] = Nome;
+        if (Nome) apiObject4["Nome"] = Nome.toLowerCase();
         if (DataNascimento) apiObject4["DataNascimento"] = DataNascimento;
         if (Email) apiObject4["Email"] = Email;
         if (TelefoneCelular) apiObject4["TelefoneCelular"] = TelefoneCelular;
