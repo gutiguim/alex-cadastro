@@ -128,7 +128,7 @@ function sendData() {
 
 
     var xhr = new XMLHttpRequest();
-    xhr.open('POST', 'https://thingproxy.freeboard.io/fetch/http://lifemanager.nextplus.com.br:9095/lifemanagerapi/lmapi/cadastro', true);
+    xhr.open('POST', 'http://lifemanager.nextplus.com.br:9095/lifemanagerapi/lmapi/cadastro', true);
     xhr.setRequestHeader("Content-Type", "application/json; charset=utf-8");
     xhr.setRequestHeader('Authorization', 'Bearer ' + '4_QBZCrrHPViIApVTWsbNe3mE6nz8jbXZ-EwtzGfCgD1uxHqGDo6hlrnpwoWYLCR7pNuCYJm6zLAHSc3bpBKCO7MMINVydUVBsvzNKytEdwaAQvRtHW8BbgKqiS7nttqVTIdezitdMCkpc0oRtXuBppxbc-lti2TSyNagb5qa4FD7hQ0y6v8PE_USCt1dxC9bBklQKPy313CPj9aMLJOqqX9FBeszTM9yjnTbDhssFlF2dwswPxv7voPtRUf23ecjRRo2v6zTg2YeC6Veo8kA78e_VJf_13jABZOj9lmZmHcWGrGf4PQndT9qZl6irXh');
     xhr.send(jsonString);
