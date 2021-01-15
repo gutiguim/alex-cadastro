@@ -128,7 +128,7 @@ function sendData() {
 
 
     var xhr = new XMLHttpRequest();
-    xhr.open('POST', 'http://lifemanager.nextplus.com.br:9095/lifemanagerapi/lmapi/cadastro', true);
+    xhr.open('POST', 'https://thingproxy.freeboard.io/fetch/https://lifemanager.nextplus.com.br:9095/lifemanagerapi/lmapi/cadastro', true);
     xhr.setRequestHeader("Content-Type", "application/json; charset=utf-8");
     xhr.setRequestHeader('Authorization', 'Bearer ' + '4_QBZCrrHPViIApVTWsbNe3mE6nz8jbXZ-EwtzGfCgD1uxHqGDo6hlrnpwoWYLCR7pNuCYJm6zLAHSc3bpBKCO7MMINVydUVBsvzNKytEdwaAQvRtHW8BbgKqiS7nttqVTIdezitdMCkpc0oRtXuBppxbc-lti2TSyNagb5qa4FD7hQ0y6v8PE_USCt1dxC9bBklQKPy313CPj9aMLJOqqX9FBeszTM9yjnTbDhssFlF2dwswPxv7voPtRUf23ecjRRo2v6zTg2YeC6Veo8kA78e_VJf_13jABZOj9lmZmHcWGrGf4PQndT9qZl6irXh');
     xhr.send(jsonString);
@@ -208,7 +208,7 @@ function sendData() {
         var jsonString2 = JSON.stringify(apiObject2, undefined, 2);
 
         var xhr2 = new XMLHttpRequest();
-        xhr2.open('POST', 'https://thingproxy.freeboard.io/fetch/http://lifemanager.nextplus.com.br:9095/lifemanagerapi/lmapi/cadastro', true);
+        xhr2.open('POST', 'https://thingproxy.freeboard.io/fetch/https://lifemanager.nextplus.com.br:9095/lifemanagerapi/lmapi/cadastro', true);
         xhr2.setRequestHeader("Content-Type", "application/json; charset=utf-8");
         xhr2.setRequestHeader('Authorization', 'Bearer ' + '4_QBZCrrHPViIApVTWsbNe3mE6nz8jbXZ-EwtzGfCgD1uxHqGDo6hlrnpwoWYLCR7pNuCYJm6zLAHSc3bpBKCO7MMINVydUVBsvzNKytEdwaAQvRtHW8BbgKqiS7nttqVTIdezitdMCkpc0oRtXuBppxbc-lti2TSyNagb5qa4FD7hQ0y6v8PE_USCt1dxC9bBklQKPy313CPj9aMLJOqqX9FBeszTM9yjnTbDhssFlF2dwswPxv7voPtRUf23ecjRRo2v6zTg2YeC6Veo8kA78e_VJf_13jABZOj9lmZmHcWGrGf4PQndT9qZl6irXh');
         xhr2.send(jsonString2);
@@ -274,7 +274,7 @@ function sendData() {
         var jsonString3 = JSON.stringify(apiObject3, undefined, 2);
 
         var xhr3 = new XMLHttpRequest();
-        xhr3.open('POST', 'https://thingproxy.freeboard.io/fetch/http://lifemanager.nextplus.com.br:9095/lifemanagerapi/lmapi/cadastro', true);
+        xhr3.open('POST', 'https://thingproxy.freeboard.io/fetch/https://lifemanager.nextplus.com.br:9095/lifemanagerapi/lmapi/cadastro', true);
         xhr3.setRequestHeader("Content-Type", "application/json; charset=utf-8");
         xhr3.setRequestHeader('Authorization', 'Bearer ' + '4_QBZCrrHPViIApVTWsbNe3mE6nz8jbXZ-EwtzGfCgD1uxHqGDo6hlrnpwoWYLCR7pNuCYJm6zLAHSc3bpBKCO7MMINVydUVBsvzNKytEdwaAQvRtHW8BbgKqiS7nttqVTIdezitdMCkpc0oRtXuBppxbc-lti2TSyNagb5qa4FD7hQ0y6v8PE_USCt1dxC9bBklQKPy313CPj9aMLJOqqX9FBeszTM9yjnTbDhssFlF2dwswPxv7voPtRUf23ecjRRo2v6zTg2YeC6Veo8kA78e_VJf_13jABZOj9lmZmHcWGrGf4PQndT9qZl6irXh');
         xhr3.send(jsonString3);
@@ -336,7 +336,7 @@ function sendData() {
         var jsonString4 = JSON.stringify(apiObject4, undefined, 2);
 
         var xhr4 = new XMLHttpRequest();
-        xhr4.open('POST', 'https://thingproxy.freeboard.io/fetch/http://lifemanager.nextplus.com.br:9095/lifemanagerapi/lmapi/cadastro', true);
+        xhr4.open('POST', 'https://thingproxy.freeboard.io/fetch/https://lifemanager.nextplus.com.br:9095/lifemanagerapi/lmapi/cadastro', true);
         xhr4.setRequestHeader("Content-Type", "application/json; charset=utf-8");
         xhr4.setRequestHeader('Authorization', 'Bearer ' + '4_QBZCrrHPViIApVTWsbNe3mE6nz8jbXZ-EwtzGfCgD1uxHqGDo6hlrnpwoWYLCR7pNuCYJm6zLAHSc3bpBKCO7MMINVydUVBsvzNKytEdwaAQvRtHW8BbgKqiS7nttqVTIdezitdMCkpc0oRtXuBppxbc-lti2TSyNagb5qa4FD7hQ0y6v8PE_USCt1dxC9bBklQKPy313CPj9aMLJOqqX9FBeszTM9yjnTbDhssFlF2dwswPxv7voPtRUf23ecjRRo2v6zTg2YeC6Veo8kA78e_VJf_13jABZOj9lmZmHcWGrGf4PQndT9qZl6irXh');
         xhr4.send(jsonString4);
